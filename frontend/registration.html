@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrations</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex flex-col min-h-screen bg-slate-50">
+  <main class="grow flex flex-col">
+    <nav class="relative bg-teal-950 border-b-2 border-teal-800 shadow-lg">
+      <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+        <div class="relative flex h-16 items-center justify-between">
+          <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+            <button id="mob-menu" type="button" class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-white/5 hover:text-white">
+              <svg class="size-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+          <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+            <div class="flex shrink-0 items-center">
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXdFae6GWB-DBtiL0kLto2aIUnR5G_c5bp_g&s" alt="Logo" class="h-8 w-auto rounded"/>
+            </div>
+            <div class="hidden sm:ml-6 sm:block">
+              <div class="flex space-x-4">
+                <a href="admin.html" id="admin-link" class="hidden rounded-md px-3 py-2 text-sm font-medium text-indigo-400 hover:text-white">Admin Dashboard</a>
+                <a href="event.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Events</a>
+                <a href="announcement.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Announcements</a>
+                <a href="promo.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Promos</a>
+                <a href="services.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Services</a>
+              </div>
+            </div>
+          </div>
+          <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+            <button id="bell" type="button" class="relative rounded-full p-1 text-gray-400 hover:text-white">
+              <span id="unread" class="absolute top-1 right-1 h-2 w-2 bg-red-500 rounded-full hidden"></span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="size-6">
+                <path d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <div class="relative ml-3">
+              <button id="pro-menu" class="relative flex rounded-full bg-gray-800 focus:ring-2 focus:ring-teal-500">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTre4TseOqU7NynnfZPa9QM2YuHLO9KdVPwrA&s" class="h-8 w-8 rounded-full" />
+              </button>
+              <div id="user-menu" class="hidden absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 py-1">
+                <a href="profile.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-slate-100">Profile</a>
+                <a href="registration.html" class="block px-4 py-2 text-sm text-teal-700 font-bold bg-slate-50">My Registrations</a>
+                <button onclick="logout()" class="w-full text-left block px-4 py-2 text-red-600 text-sm hover:bg-slate-100">Logout</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 w-full">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-8 gap-4">
+        <h1 class="text-3xl font-bold text-teal-950">My Registrations</h1>
+        
+        <div class="relative w-full md:w-64">
+          <input type="text" id="search-input" placeholder="Search events..." class="w-full pl-10 pr-4 py-2 rounded-lg border border-slate-200 focus:outline-none focus:border-teal-500">
+          <svg class="absolute left-3 top-2.5 size-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+
+      <div id="loading" class="text-center py-20 text-gray-500">
+        <p class="animate-pulse">Fetching your registrations...</p>
+      </div>
+
+      <div id="list" class="grid gap-4"></div>
+      
+      <p id="empty" class="hidden text-gray-500 text-center py-20 italic">No registrations found.</p>
+    </div>
+  </main>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> 
+<script src="./js/api.js"></script>
+<script src="./js/auth.js"></script>
+<script>
+    function cancel(regId) {
+        if (confirm("Are you sure you want to cancel this registration?")) {
+            Api.call(`/api/registrations/${regId}`, 'DELETE')
+                .done(function() {
+                    $(`#reg-${regId}`).fadeOut(300, function() {
+                        $(this).remove();
+                        if ($('#list').children().length === 0) $('#empty').removeClass('hidden');
+                    });
+                })
+                .fail(function() {
+                    alert("Unable to cancel. Please try again.");
+                });
+        }
+    }
+    window.logout = function() {
+    localStorage.removeItem('token');
+    window.location.href = 'login.html';
+  };
+
+    $(document).ready(function() {
+        $('#pro-menu').click(function() {
+            $('#user-menu').toggleClass('hidden');
+        });
+        Api.call('/api/registrations', 'GET')
+            .done(function(registrations) {
+                $('#loading').addClass('hidden');
+                if (!registrations || registrations.length === 0) {
+                    $('#empty').removeClass('hidden');
+                    return;
+                }
+                
+                registrations.forEach(reg => {
+                    const event = reg.event || reg;
+                    const date = event.date ? new Date(event.date).toLocaleDateString() : 'Date';
+                    $('#list').append(`
+                        <div id="reg-${reg.id}" class="reg-card flex flex-col sm:flex-row items-center justify-between bg-white p-6 rounded-xl border border-slate-200 shadow-sm transition-hover hover:shadow-md">
+                            <div class="mb-4 sm:mb-0 text-center sm:text-left">
+                                <h3 class="event-name text-xl font-bold text-slate-800">${event.title}</h3>
+                                <p class="text-slate-500">${date} • ${event.location}</p>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <button onclick="cancel(${reg.id})" class="px-4 py-2 text-red-500 hover:bg-red-50 rounded-lg text-sm font-semibold transition-colors">Cancel</button>
+                                <span class="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full uppercase tracking-wider">Confirmed</span>
+                                <a href="event-details.html?id=${event.id}" class="px-4 py-2 bg-teal-700 text-white rounded-lg text-sm font-semibold hover:bg-teal-800 transition-colors">Details</a>
+                            </div>
+                        </div>
+                    `);
+                });
+            })
+            .fail(function() {
+                $('#loading').html('<p class="text-red-500 font-bold">Session expired. Please log in again.</p>');
+            });
+
+        $('#search-input').on('keyup', function() {
+            const value = $(this).val().toLowerCase();
+            $('.reg-card').filter(function() {
+                $(this).toggle($(this).find('.event-name').text().toLowerCase().indexOf(value) > -1);
+            });
+        });
+    });
+</script>
+</body>
+</html>

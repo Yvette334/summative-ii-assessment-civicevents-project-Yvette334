@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Event</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex flex-col min-h-screen">
+  <main class="grow flex flex-col">
+    <nav class="relative bg-teal-950 border-b-2 border-teal-800 shadow-lg">
+      <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+        <div class="relative flex h-16 items-center justify-between">
+          <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+            <button id="mob-menu" type="button" command="--toggle" commandfor="mobile-menu" class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-white/5 hover:text-white focus:outline-2 focus:-outline-offset-1 focus:outline-indigo-500">
+              <svg class="size-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+          <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+            <div class="flex shrink-0 items-center">
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXdFae6GWB-DBtiL0kLto2aIUnR5G_c5bp_g&s" alt="profile" class="h-8 w-auto"/>
+            </div>
+            <div class="hidden sm:ml-6 sm:block">
+              <div class="flex space-x-4">
+                <a href="admin.html" id="admin" class="hidden rounded-md px-3 py-2 text-sm font-medium text-indigo-400 hover:text-white" >Admin Dashboard</a>
+                <a href="event.html" aria-current="page" class="rounded-md bg-teal-700 px-3 py-2 text-sm font-black text-white">Event</a>
+                <a href="announcement.html" class="rounded-md px-3 py-2 text-sm font-semibold text-teal-100 hover:bg-white/10 hover:text-white">Announcements</a>
+                <a href="promo.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Promos</a>
+                <a href="services.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Services</a>
+              </div>
+            </div>
+          </div>
+          <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+            <button id="bell" type="button" class="relative rounded-full p-1 text-gray-400 hover:text-white focus:outline-2 focus:outline-offset-2 focus:outline-indigo-500">
+              <span id="unread" class="absolute top-1 right-1 h-2 w-2 bg-red-500 rounded-full hidden"></span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="size-6">
+                <path d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+
+            <div class="relative ml-3">
+              <button id="pro-menu" class="relative flex rounded-full bg-gray-800 outline-none">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTre4TseOqU7NynnfZPa9QM2YuHLO9KdVPwrA&s" class="h-8 w-8 rounded-full" />
+              </button>
+
+              <div id="user" class="hidden absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-gray-800 py-1">
+                <a href="profile.html" class="block px-4 py-2 text-sm text-gray-300 focus:bg-white/5 focus:outline-hidden" >Profile</a>
+                <a href="registration.html" class="block px-4 py-2 text-sm text-gray-300 focus:bg-white/5 focus:outline-hidden" >Registration</a>
+                <button onclick="logout()"class="w-full text-left block px-4 py-2 text-gray-300 text-sm hover:bg-white"> Logout</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="mobile-menu" hidden class="block sm:hidden">
+        <div class="space-y-1 px-2 pt-2 pb-3">
+          <a href="admin.html" id="admin" class="hidden rounded-md px-3 py-2 text-sm font-medium text-indigo-400 hover:text-white" >Admin Dashboard</a>
+                <a href="event.html" aria-current="page" class="rounded-md bg-gray-950/50 px-3 py-2 text-sm font-medium text-white">Event</a>
+                <a href="announcement.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Announcements</a>
+                <a href="promo.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Promos</a>
+                <a href="services.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Services</a>
+        </div>
+      </div>
+    </nav>
+    <div class="mx-auto w-full max-7xl flex flex-col gap-6 p-4 md:flex-row ">
+      <aside class="w-full md:w-64 bg-white rounded-lg shadow p-4 hidden md:block sticky top-10">
+        <h3 class="text-gray-500 mb-4">Menu</h3>
+        <nav class="space-y-1">
+          <a href="admin-dashboard.html" class="flex text-gray-600 items-center hover:bg-gray-50 px-3 py-2 text-sm rounded-md" >Users</a>
+          <a href="admin-event.html" class="flex text-gray-600 items-center hover:bg-gray-50 px-3 py-2 text-sm rounded-md">Add Event</a>
+          <a href="admin-promo.html" class="flex text-gray-600 items-center hover:bg-gray-50 px-3 py-2 text-sm rounded-md">Add Promo</a>
+          <a href="admin-announcement.html" class="flex text-gray-600 items-center hover:bg-gray-50 px-3 py-2 text-sm rounded-md">Announcement</a>
+          <button onclick="logout()" class="w-full flex rounded-md text-red-600 hover:bg-red-50 px-3 py-2 ">Logout</button>
+       </nav>
+      </aside>
+      <div class="flex-1 bg-white rounded shadow-md border border-gray-100">
+        <div class="border border-gray-50 p-6">
+          <h2 id="f-title" class="text-teal-950 text-xl">Create A New Event</h2>
+        </div>
+        <form id="form" class="space-y-5 p-8">
+          <input type="hidden" id="id">
+          <div class="grid grid-cols gap-5">
+            <div>
+              <label for="event-title" class="block text-gray-500" >Event Title</label>
+              <input type="text" id="title" class="w-full border border-gray-200 rounded-lg p-2" required>
+            </div>
+            <div>
+              <label for="desc" class="block text-gray-500">Description</label>
+              <textarea id="desc" rows="5" cols="80"  class="border" required ></textarea>
+            </div>
+            <div class="grid grid-cols gap-5 md:grid-cols-2">
+              <div>
+                <label for="location" class="block text-gray-500">Location</label>
+                <input type="text" id="location" class="w-full border-gray-200 border rounded-lg p-2" required>
+              </div>
+              <div>
+                <label for="start" class="block text-gray-500">Starts At</label>
+                <input type="datetime-local" id="start" class="w-full border-gray-200 border rounded-lg p-2" required>
+              </div>
+              <div>
+                <label for="end" class="block text-gray-500">Ends At</label>
+                <input type="datetime-local" id="end" class="w-full border-gray-200 border rounded-lg p-2" required>
+              </div>
+            </div>
+            <div>
+              <label for="image" class="block text-gray-500">Event Image</label>
+              <div class="flex items-center gap-4 p-4 border-2 border-dashed border-gray-200 rounded-xl">
+                <input type="file" id="image" class="text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-bold file:bg-teal-50 file:text-teal-700 hover:file:bg-teal-100">
+              <img id="event-img" src="" class="hidden h-16 w-16 object-cover rounded-lg shadow-sm border border-gray-200">
+        </div>
+        <div class="flex justify-end pt-6 gap-3">
+          <button type="button" id="delete" class="text-red-500 hover:br-red-50 rounbed-lg hidden px-6">Delete</button>
+          <button id="submit" class="bg-teal-600 text-white px-8 py-2 rounded-lg shadow-lg hover:bg-teal-700">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+    </main>
+    <footer class="bg-teal-950 text-center text-surface/75 dark:bg-neutral-700 dark:text-white/75 lg:text-left">
+  <div class="mx-6 py-10 text-center md:text-left">
+    <div class="grid-1 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+      <div class="">
+        <h6
+          class="mb-4 flex items-center justify-center font-semibold uppercase md:justify-start">
+          <span class="me-3 [&>svg]:h-4 [&>svg]:w-4">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor">
+              <path
+                d="M12.378 1.602a.75.75 0 00-.756 0L3 6.632l9 5.25 9-5.25-8.622-5.03zM21.75 7.93l-9 5.25v9l8.628-5.032a.75.75 0 00.372-.648V7.93zM11.25 22.18v-9l-9-5.25v8.57a.75.75 0 00.372.648l8.628 5.033z" />
+            </svg>
+          </span>
+          CivicEvents
+        </h6>
+        <p>
+          Your accessible portal for city events and community services. Stay connected with what's happening in your city.
+        </p>
+      </div>
+      <div>
+         <h6
+          class="mb-4 flex justify-center font-semibold uppercase md:justify-start">
+          Website Links
+        </h6>
+        <p class="mb-4">
+          <a href="event.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Event</a>
+        </p>
+        <p class="mb-4">
+          <a href="announcement.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Announcements</a>
+        </p>
+        <p class="mb-4">
+          <a href="promo.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Promos</a>
+
+        </p>
+        <p>
+          <a href="services.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Services</a>
+        </p>
+      </div>
+      <div>
+        <h6
+          class="mb-4 flex justify-center font-semibold uppercase md:justify-start">
+          Contact & help
+        </h6>
+        <p class="mb-4 flex items-center justify-center md:justify-start">
+          <span class="me-3 [&>svg]:h-5 [&>svg]:w-5">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor">
+              <path
+                d="M11.47 3.84a.75.75 0 011.06 0l8.69 8.69a.75.75 0 101.06-1.06l-8.689-8.69a2.25 2.25 0 00-3.182 0l-8.69 8.69a.75.75 0 001.061 1.06l8.69-8.69z" />
+              <path
+                d="M12 5.432l8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 01-.75-.75v-4.5a.75.75 0 00-.75-.75h-3a.75.75 0 00-.75.75V21a.75.75 0 01-.75.75H5.625a1.875 1.875 0 01-1.875-1.875v-6.198a2.29 2.29 0 00.091-.086L12 5.43z" />
+            </svg>
+          </span>
+          Rwanda, Kigali
+        </p>
+        <p class="mb-4 flex items-center justify-center md:justify-start">
+          <span class="me-3 [&>svg]:h-5 [&>svg]:w-5">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor">
+              <path
+                d="M1.5 8.67v8.58a3 3 0 003 3h15a3 3 0 003-3V8.67l-8.928 5.493a3 3 0 01-3.144 0L1.5 8.67z" />
+              <path
+                d="M22.5 6.908V6.75a3 3 0 00-3-3h-15a3 3 0 00-3 3v.158l9.714 5.978a1.5 1.5 0 001.572 0L22.5 6.908z" />
+            </svg>
+          </span>
+          civievent@gmail.com
+        </p>
+        <p class="mb-4 flex items-center justify-center md:justify-start">
+          <span class="me-3 [&>svg]:h-5 [&>svg]:w-5">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor">
+              <path
+                fill-rule="evenodd"
+                d="M1.5 4.5a3 3 0 013-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 01-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 006.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 011.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 01-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 6.75V4.5z"
+                clip-rule="evenodd" />
+            </svg>
+          </span>
+          +250788873423
+        </p>
+        <p class="flex items-center justify-center md:justify-start">
+          <span class="me-3 [&>svg]:h-5 [&>svg]:w-5">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor">
+              <path
+                fill-rule="evenodd"
+                d="M7.875 1.5C6.839 1.5 6 2.34 6 3.375v2.99c-.426.053-.851.11-1.274.174-1.454.218-2.476 1.483-2.476 2.917v6.294a3 3 0 003 3h.27l-.155 1.705A1.875 1.875 0 007.232 22.5h9.536a1.875 1.875 0 001.867-2.045l-.155-1.705h.27a3 3 0 003-3V9.456c0-1.434-1.022-2.7-2.476-2.917A48.716 48.716 0 0018 6.366V3.375c0-1.036-.84-1.875-1.875-1.875h-8.25zM16.5 6.205v-2.83A.375.375 0 0016.125 3h-8.25a.375.375 0 00-.375.375v2.83a49.353 49.353 0 019 0zm-.217 8.265c.178.018.317.16.333.337l.526 5.784a.375.375 0 01-.374.409H7.232a.375.375 0 01-.374-.409l.526-5.784a.373.373 0 01.333-.337 41.741 41.741 0 018.566 0zm.967-3.97a.75.75 0 01.75-.75h.008a.75.75 0 01.75.75v.008a.75.75 0 01-.75.75H18a.75.75 0 01-.75-.75V10.5zM15 9.75a.75.75 0 00-.75.75v.008c0 .414.336.75.75.75h.008a.75.75 0 00.75-.75V10.5a.75.75 0 00-.75-.75H15z"
+                clip-rule="evenodd" />
+            </svg>
+          </span>
+          +250788873423
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-black/5 p-6 text-center">
+    <span>© 2026 Copyright.CivicEvents</span>
+  </div>
+</footer>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> 
+<script src="./js/api.js"></script>
+<script src="./js/auth.js"></script>
+<script>
+  const token = localStorage.getItem('token');
+  const API_URL = 'http://localhost:4000/api/events';
+
+  $(document).ready(() => {
+    const edit = new URLSearchParams(window.location.search).get('edit');
+
+    $('#image').on('change', function() {
+      const file = this.files[0];
+      if(file) {
+        const reader = new FileReader();
+        reader.onload = (e) => $('#event-img').attr('src', e.target.result).removeClass('hidden');
+        reader.readAsDataURL(file);
+      }
+    });
+
+    if(edit) {
+      $('#f-title').text('Edit Event');
+      $('#submit').text('Update Changes');
+      $('#delete').removeClass('hidden');
+
+      fetch(`${API_URL}/${edit}`)
+        .then(res => res.json())
+        .then(data => {
+          $('#id').val(data.id);
+          $('#title').val(data.title);
+          $('#desc').val(data.description);
+          $('#location').val(data.location);
+          if(data.start) $('#start').val(new Date(data.start).toISOString().slice(0, 16));
+          if(data.end) $('#end').val(new Date(data.end).toISOString().slice(0, 16));
+          if(data.image_url) $('#event-img').attr('src', data.image_url).removeClass('hidden');
+        });
+    }
+
+    $('#form').on('submit', async function(e) {
+      e.preventDefault();
+      const id = $('#id').val();
+      
+      const formData = new FormData();
+      formData.append('title', $('#title').val());
+      formData.append('description', $('#desc').val());
+      formData.append('location', $('#location').val());
+      formData.append('start', $('#start').val());
+      formData.append('end', $('#end').val());
+      
+      const fileInput = $('#image')[0].files[0];
+      if (fileInput) formData.append('image', fileInput);
+
+      const method = id ? 'PATCH' : 'POST';
+      const url = id ? `${API_URL}/${id}` : API_URL;
+
+      try {
+        const response = await fetch(url, {
+          method: method,
+          headers: { 'Authorization': `Bearer ${token}` },
+          body: formData 
+        });
+
+        if (response.ok) {
+          alert('Success!');
+          window.location.href = 'admin-dashboard.html';
+        } else {
+          const err = await response.json();
+          alert(`Save failed: ${err.message || 'Check console'}`);
+        }
+      } catch (error) {
+        console.error("Submission error:", error);
+      }
+    });
+
+    $('#delete').on('click', async function() {
+      if (confirm('Are you sure you want to delete this event?')) {
+        const id = $('#id').val();
+        await fetch(`${API_URL}/${id}`, {
+          method: 'DELETE',
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+        window.location.href = 'admin-dashboard.html';
+      }
+    });
+  });
+</script>
+</body>
+</html>
