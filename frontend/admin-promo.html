@@ -1,88 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CivicEvents</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Promo - CivicEvents+</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="flex flex-col min-h-screen">
-  <main class="grow flex flex-col">
-    <nav class="relative bg-teal-950 border-b-2 border-teal-800 shadow-lg">
-      <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-        <div class="relative flex h-16 items-center justify-between">
-          <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
-            <button id="mob-menu" type="button" command="--toggle" commandfor="mobile-menu" class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-white/5 hover:text-white focus:outline-2 focus:-outline-offset-1 focus:outline-indigo-500">
-              <svg class="size-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </button>
-          </div>
-          <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-            <div class="flex shrink-0 items-center">
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXdFae6GWB-DBtiL0kLto2aIUnR5G_c5bp_g&s" alt="profile" class="h-8 w-auto"/>
-            </div>
-            <div class="hidden sm:ml-6 sm:block">
-              <div class="flex space-x-4">
-                <a href="admin.html" id="admin" class="hidden rounded-md px-3 py-2 text-sm font-medium text-indigo-400 hover:text-white" >Admin Dashboard</a>
-                <a href="event.html" aria-current="page" class="rounded-md bg-teal-700 px-3 py-2 text-sm font-black text-white">Event</a>
-                <a href="announcement.html" class="rounded-md px-3 py-2 text-sm font-semibold text-teal-100 hover:bg-white/10 hover:text-white">Announcements</a>
-                <a href="promo.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Promos</a>
-                <a href="services.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Services</a>
-              </div>
+<body class="bg-slate-50 flex flex-col min-h-screen text-slate-800 font-sans">
+
+  <nav class="relative bg-teal-950 border-b border-teal-800 shadow-md">
+    <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+      <div class="relative flex h-16 items-center justify-between">
+        <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+          <button id="mob-menu" type="button" class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-white/5 hover:text-white">
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
+            </svg>
+          </button>
+        </div>
+        <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+          <div class="flex shrink-0 items-center text-white font-bold">CivicEvents</div>
+          <div class="hidden sm:ml-6 sm:block">
+            <div class="flex space-x-4">
+              <a href="admin-dashboard.html" class="rounded-md px-3 py-2 text-sm font-medium text-teal-300 hover:text-white">Admin Dashboard</a>
+              <a href="event.html" class="rounded-md px-3 py-2 text-sm font-medium text-teal-100 hover:bg-white/10 hover:text-white">Events</a>
+              <a href="announcement.html" class="rounded-md px-3 py-2 text-sm font-medium text-teal-100 hover:bg-white/10 hover:text-white">Announcements</a>
+              <a href="promo.html" class="rounded-md bg-teal-800 px-3 py-2 text-sm font-bold text-white">Promos</a>
             </div>
           </div>
-          <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-            <button id="bell" type="button" class="relative rounded-full p-1 text-gray-400 hover:text-white focus:outline-2 focus:outline-offset-2 focus:outline-indigo-500">
-              <span id="unread" class="absolute top-1 right-1 h-2 w-2 bg-red-500 rounded-full hidden"></span>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="size-6">
-                <path d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
+        </div>
+        <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+          <div class="relative ml-4">
+            <button id="pro-menu" class="flex text-sm rounded-full bg-teal-800 text-white border border-teal-600 p-1 px-3">
+              Profile <svg class="ml-1 w-4 h-4 translate-y-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
             </button>
-
-            <div class="relative ml-3">
-              <button id="pro-menu" class="relative flex rounded-full bg-gray-800 outline-none">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTre4TseOqU7NynnfZPa9QM2YuHLO9KdVPwrA&s" class="h-8 w-8 rounded-full" />
-              </button>
-
-              <div id="user" class="hidden absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-gray-800 py-1">
-                <a href="profile.html" class="block px-4 py-2 text-sm text-gray-300 focus:bg-white/5 focus:outline-hidden" >Profile</a>
-                <a href="registration.html" class="block px-4 py-2 text-sm text-gray-300 focus:bg-white/5 focus:outline-hidden" >Registration</a>
-                <button onclick="logout()"class="w-full text-left block px-4 py-2 text-gray-300 text-sm hover:bg-white"> Logout</button>
+            <div id="user-dropdown" class="hidden absolute right-0 z-50 mt-2 w-48 rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5">
+              <div class="px-4 py-2 border-b border-slate-100">
+                <p id="nav-name" class="text-sm font-bold text-slate-800"></p>
+                <p id="nav-role" class="text-xs text-slate-500 capitalize"></p>
               </div>
+              <a href="profile.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-100">My Profile</a>
+              <button onclick="auth.logout()" class="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-slate-100 font-bold border-t border-slate-100">Logout</button>
             </div>
           </div>
         </div>
       </div>
-
-      <div id="mobile-menu" hidden class="block sm:hidden">
-        <div class="space-y-1 px-2 pt-2 pb-3">
-          <a href="admin.html" id="admin" class="hidden rounded-md px-3 py-2 text-sm font-medium text-indigo-400 hover:text-white" >Admin Dashboard</a>
-                <a href="event.html" aria-current="page" class="rounded-md bg-gray-950/50 px-3 py-2 text-sm font-medium text-white">Event</a>
-                <a href="announcement.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Announcements</a>
-                <a href="promo.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Promos</a>
-                <a href="services.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Services</a>
-        </div>
+    </div>
+    <!-- mobile nav -->
+    <div id="mobile-menu" class="hidden sm:hidden bg-teal-900 absolute w-full z-40 border-t border-teal-800">
+      <div class="space-y-1 px-2 pt-2 pb-3">
+        <a href="admin-dashboard.html" class="block rounded-md px-3 py-2 text-base font-medium text-teal-300">Admin Dashboard</a>
+        <a href="event.html" class="block rounded-md px-3 py-2 text-base font-medium text-teal-100">Events</a>
+        <a href="announcement.html" class="block rounded-md px-3 py-2 text-base font-medium text-teal-100">Announcements</a>
+        <a href="promo.html" class="block rounded-md bg-teal-800 px-3 py-2 text-base font-medium text-white">Promos</a>
       </div>
-    </nav>
-    <aside class="w-full bg-white rounded-lg shadow p-4 hidden sticky top-10">
-      <h3 class="text-gray-500 mb-4">Menu</h3>
-      <nav class="space-y-1">
-        <a href="admin-dashboard.html" class="flex text-gray-600 items-center hover:bg-gray-50 px-3 py-2 text-sm rounded-md" >Users</a>
-        <a href="admin-event.html" class="flex text-gray-600 items-center hover:bg-gray-50 px-3 py-2 text-sm rounded-md">Add Event</a>
-        <a href="admin-promo.html" class="flex text-gray-600 items-center hover:bg-gray-50 px-3 py-2 text-sm rounded-md">Add Promo</a>
-        <a href="admin-announcement.html" class="flex text-gray-600 items-center hover:bg-gray-50 px-3 py-2 text-sm rounded-md">Announcement</a>
-        <button onclick="logout()" class="w-full flex rounded-md text-red-600 hover:bg-red-50 px-3 py-2 ">Logout</button>
-      </nav>
-    </aside>
-    <div class="flex-1 bg-white rounded shadow-md border border-gray-100">
-      <div class="border border-gray-50 p-6">
-        <h2 id></h2>
+    </div>
+  </nav>
+
+  <main class="grow p-4 sm:p-8">
+    <div class="mx-auto w-full max-w-2xl">
+
+      <div class="flex items-center justify-between mb-8">
+        <h1 id="page-title" class="text-2xl font-bold text-teal-950">Create Promo</h1>
+        <a href="promo.html" class="text-teal-700 hover:text-teal-900 font-medium text-sm">Cancel</a>
+      </div>
+
+      <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+        <form id="promo-form" class="space-y-5">
+
+          <!-- promo title -->
+          <div>
+            <label for="promo-title" class="block text-sm font-bold text-slate-700 mb-1">Title</label>
+            <input type="text" id="promo-title" required placeholder="e.g. Summer Festival Promo"
+              class="w-full rounded-md border border-slate-300 px-3 py-2 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500">
+          </div>
+
+          <!-- short description -->
+          <div>
+            <label for="promo-desc" class="block text-sm font-bold text-slate-700 mb-1">Description</label>
+            <textarea id="promo-desc" rows="3" placeholder="What is this promo about?"
+              class="w-full rounded-md border border-slate-300 px-3 py-2 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500"></textarea>
+          </div>
+
+          <!-- video file upload -->
+          <div>
+            <label for="promo-video" class="block text-sm font-bold text-slate-700 mb-1">Video File</label>
+            <input type="file" id="promo-video" accept="video/*" required
+              class="w-full text-sm text-slate-600 border border-slate-300 rounded-md px-3 py-2 file:mr-3 file:py-1 file:px-3 file:rounded file:border-0 file:bg-teal-50 file:text-teal-700 file:font-medium hover:file:bg-teal-100">
+            <p class="text-xs text-slate-400 mt-1">Accepted: MP4, WebM, OGG. Max 100MB.</p>
+          </div>
+
+          <!-- video preview shows after picking -->
+          <div id="video-preview-box" class="hidden">
+            <p class="text-xs text-slate-500 mb-1">Preview:</p>
+            <video id="video-preview" controls class="w-full rounded-lg bg-black max-h-48" aria-label="Video preview"></video>
+          </div>
+
+          <!-- captions text (optional) -->
+          <div>
+            <label for="promo-captions" class="block text-sm font-bold text-slate-700 mb-1">Captions / Transcript <span class="font-normal text-slate-400">(optional)</span></label>
+            <textarea id="promo-captions" rows="3" placeholder="Paste caption text here if you have one..."
+              class="w-full rounded-md border border-slate-300 px-3 py-2 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 text-sm"></textarea>
+          </div>
+
+          <!-- publish toggle -->
+          <div class="flex items-center gap-3">
+            <input type="checkbox" id="promo-published" checked class="h-4 w-4 text-teal-600 border-gray-300 rounded">
+            <label for="promo-published" class="text-sm font-bold text-slate-700">Publish immediately</label>
+          </div>
+
+          <div class="pt-4 border-t border-slate-100">
+            <button type="submit" id="save-btn" class="bg-teal-700 hover:bg-teal-800 text-white px-6 py-2 rounded-lg font-bold transition">
+              Save Promo
+            </button>
+          </div>
+        </form>
       </div>
 
     </div>
-    </main>
-    <footer class="bg-teal-950 text-center text-surface/75 dark:bg-neutral-700 dark:text-white/75 lg:text-left">
+  </main>
+
+  <!-- toast -->
+  <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300">
+    <div id="toast-box" class="px-5 py-3 rounded-xl shadow-xl text-white font-medium bg-teal-600">
+      <span id="toast-msg"></span>
+    </div>
+  </div>
+
+          <footer class="bg-teal-950 text-teal-100 text-center lg:text-left mt-auto">
   <div class="mx-6 py-10 text-center md:text-left">
     <div class="grid-1 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
       <div class="">
@@ -110,17 +155,17 @@
           Website Links
         </h6>
         <p class="mb-4">
-          <a href="event.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Event</a>
+          <a href="event.html" class="rounded-md px-3 py-2 text-sm font-medium text-teal-300 hover:bg-white/5 hover:text-white">Event</a>
         </p>
         <p class="mb-4">
-          <a href="announcement.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Announcements</a>
+          <a href="announcement.html" class="rounded-md px-3 py-2 text-sm font-medium text-teal-300 hover:bg-white/5 hover:text-white">Announcements</a>
         </p>
         <p class="mb-4">
-          <a href="promo.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Promos</a>
+          <a href="promo.html" class="rounded-md px-3 py-2 text-sm font-medium text-teal-300 hover:bg-white/5 hover:text-white">Promos</a>
 
         </p>
         <p>
-          <a href="services.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Services</a>
+          <a href="services.html" class="rounded-md px-3 py-2 text-sm font-medium text-teal-300 hover:bg-white/5 hover:text-white">Services</a>
         </p>
       </div>
       <div>
@@ -189,22 +234,107 @@
   </div>
 
   <!--Copyright section-->
-  <div class="bg-black/5 p-6 text-center">
+  <div class="bg-teal-900/50 p-6 text-center border-t border-teal-800">
     <span>© 2026 Copyright.CivicEvents</span>
   </div>
 </footer>
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> 
-<script src="./js/api.js"></script>
-<script src="./js/auth.js"></script>
-<script>
-  const token = localStorage.getItem('token');
-  const url = 'http://localhost:4000/api/events';
-  $(document).ready(() => {
-    const edit =new URLSearchParams(window.location.search).get('edit');
-    if(edit){
 
-    }
-  })
-</script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    $(document).ready(function () {
+      // only admins allowed here
+      auth.enforceRole(['admin']);
+      auth.setupNavigation();
+
+      var me = auth.getUser();
+      if (me) {
+        $('#nav-name').text(me.full_name);
+        $('#nav-role').text(me.role);
+      }
+
+      $('#mob-menu').click(function () { $('#mobile-menu').toggleClass('hidden'); });
+      $('#pro-menu').click(function (e) { e.stopPropagation(); $('#user-dropdown').toggleClass('hidden'); });
+      $(document).click(function () { $('#user-dropdown').addClass('hidden'); });
+
+      // check if we are editing an existing promo
+      var promoId = new URLSearchParams(window.location.search).get('id');
+      if (promoId) {
+        $('#page-title').text('Edit Promo');
+        $('#save-btn').text('Update Promo');
+        // load existing data into form
+        Api.call('/api/promos/' + promoId, 'GET').done(function (p) {
+          $('#promo-title').val(p.title);
+          $('#promo-desc').val(p.description);
+          $('#promo-captions').val(p.caption_text);
+          $('#promo-published').prop('checked', p.published !== false);
+          // video upload not required when editing
+          $('#promo-video').removeAttr('required');
+        });
+      }
+
+      // show video preview when user picks a file
+      $('#promo-video').change(function () {
+        var file = this.files[0];
+        if (file) {
+          // check size before showing preview
+          if (file.size > 100 * 1024 * 1024) {
+            showToast('Video is too big. Max 100MB.', true);
+            $(this).val('');
+            return;
+          }
+          var url = URL.createObjectURL(file);
+          $('#video-preview').attr('src', url);
+          $('#video-preview-box').removeClass('hidden');
+        }
+      });
+
+      function showToast(msg, isErr) {
+        $('#toast-box').removeClass('bg-teal-600 bg-red-600').addClass(isErr ? 'bg-red-600' : 'bg-teal-600');
+        $('#toast-msg').text(msg);
+        $('#toast').removeClass('translate-y-20 opacity-0');
+        setTimeout(function () { $('#toast').addClass('translate-y-20 opacity-0'); }, 3000);
+      }
+
+      // form submit
+      $('#promo-form').on('submit', function (e) {
+        e.preventDefault();
+
+        var fd = new FormData();
+        fd.append('title', $('#promo-title').val());
+        fd.append('description', $('#promo-desc').val());
+        fd.append('caption_text', $('#promo-captions').val());
+        fd.append('published', $('#promo-published').is(':checked'));
+
+        var videoFile = $('#promo-video')[0].files[0];
+        if (videoFile) {
+          fd.append('video', videoFile);
+        }
+
+        var btn = $('#save-btn');
+        btn.prop('disabled', true).text('Saving...');
+
+        // decide if create or update
+        var endpoint = '/api/promos';
+        var method = 'POST';
+        if (promoId) {
+          endpoint = '/api/promos/' + promoId;
+          method = 'PUT';
+        }
+
+        Api.call(endpoint, method, fd, true)
+          .done(function () {
+            showToast(promoId ? 'Promo updated!' : 'Promo created!');
+            setTimeout(function () { window.location.href = 'promo.html'; }, 1500);
+          })
+          .fail(function (err) {
+            var msg = err.responseJSON ? err.responseJSON.message : 'Failed to save. Try again.';
+            showToast(msg, true);
+            btn.prop('disabled', false).text(promoId ? 'Update Promo' : 'Save Promo');
+          });
+      });
+    });
+  </script>
 </body>
 </html>

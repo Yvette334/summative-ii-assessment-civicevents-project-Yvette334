@@ -80,7 +80,8 @@
 <script>
     function cancel(regId) {
         if (confirm("Are you sure you want to cancel this registration?")) {
-            Api.call(`/api/registrations/${regId}`, 'DELETE')
+            // cancel by event id
+            Api.call('/api/event-registrations/' + regId, 'DELETE')
                 .done(function() {
                     $(`#reg-${regId}`).fadeOut(300, function() {
                         $(this).remove();
@@ -101,7 +102,8 @@
         $('#pro-menu').click(function() {
             $('#user-menu').toggleClass('hidden');
         });
-        Api.call('/api/registrations', 'GET')
+        // correct endpoint for my registrations
+        Api.call('/api/event-registrations/my-registrations', 'GET')
             .done(function(registrations) {
                 $('#loading').addClass('hidden');
                 if (!registrations || registrations.length === 0) {
@@ -121,7 +123,7 @@
                             <div class="flex items-center gap-3">
                                 <button onclick="cancel(${reg.id})" class="px-4 py-2 text-red-500 hover:bg-red-50 rounded-lg text-sm font-semibold transition-colors">Cancel</button>
                                 <span class="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full uppercase tracking-wider">Confirmed</span>
-                                <a href="event-details.html?id=${event.id}" class="px-4 py-2 bg-teal-700 text-white rounded-lg text-sm font-semibold hover:bg-teal-800 transition-colors">Details</a>
+                                <a href="event-detail.html?id=${event.id}" class="px-4 py-2 bg-teal-700 text-white rounded-lg text-sm font-semibold hover:bg-teal-800 transition-colors">Details</a>
                             </div>
                         </div>
                     `);

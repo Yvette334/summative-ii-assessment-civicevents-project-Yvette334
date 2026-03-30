@@ -1,125 +1,149 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Event</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manage Event - CivicEvents+</title>
     <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="flex flex-col min-h-screen">
-  <main class="grow flex flex-col">
-    <nav class="relative bg-teal-950 border-b-2 border-teal-800 shadow-lg">
+  </head>
+  <body class="bg-slate-50 flex flex-col min-h-screen text-slate-800 font-sans">
+    
+    <nav class="relative bg-teal-950 border-b border-teal-800 shadow-md">
+      <!-- (Standard Navbar) -->
       <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div class="relative flex h-16 items-center justify-between">
           <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
-            <button id="mob-menu" type="button" command="--toggle" commandfor="mobile-menu" class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-white/5 hover:text-white focus:outline-2 focus:-outline-offset-1 focus:outline-indigo-500">
-              <svg class="size-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
+            <button id="mob-menu" type="button" class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-white/5 hover:text-white">
+              <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/></svg>
             </button>
           </div>
           <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-            <div class="flex shrink-0 items-center">
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXdFae6GWB-DBtiL0kLto2aIUnR5G_c5bp_g&s" alt="profile" class="h-8 w-auto"/>
-            </div>
+             <div class="flex shrink-0 items-center text-white font-bold">CivicEvents</div>
             <div class="hidden sm:ml-6 sm:block">
               <div class="flex space-x-4">
-                <a href="admin.html" id="admin" class="hidden rounded-md px-3 py-2 text-sm font-medium text-indigo-400 hover:text-white" >Admin Dashboard</a>
-                <a href="event.html" aria-current="page" class="rounded-md bg-teal-700 px-3 py-2 text-sm font-black text-white">Event</a>
-                <a href="announcement.html" class="rounded-md px-3 py-2 text-sm font-semibold text-teal-100 hover:bg-white/10 hover:text-white">Announcements</a>
-                <a href="promo.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Promos</a>
-                <a href="services.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Services</a>
+                <a href="admin-dashboard.html" class="admin-only hidden rounded-md px-3 py-2 text-sm font-medium text-teal-300 hover:text-white" >Admin Dashboard</a>
+                <a href="event.html" class="rounded-md bg-teal-800 px-3 py-2 text-sm font-bold text-white">Events</a>
+                <a href="announcement.html" class="rounded-md px-3 py-2 text-sm font-medium text-teal-100 hover:bg-white/10 hover:text-white">Announcements</a>
+                <a href="promo.html" class="rounded-md px-3 py-2 text-sm font-medium text-teal-100 hover:bg-white/10 hover:text-white">Promos</a>
+                <a href="services.html" class="rounded-md px-3 py-2 text-sm font-medium text-teal-100 hover:bg-white/10 hover:text-white">Services</a>
               </div>
             </div>
           </div>
           <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-            <button id="bell" type="button" class="relative rounded-full p-1 text-gray-400 hover:text-white focus:outline-2 focus:outline-offset-2 focus:outline-indigo-500">
-              <span id="unread" class="absolute top-1 right-1 h-2 w-2 bg-red-500 rounded-full hidden"></span>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="size-6">
-                <path d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
+             <!-- Notifications Dropdown -->
+            <button id="bell" type="button" class="relative rounded-full p-1 text-teal-300 hover:text-white focus:outline-none">
+              <span id="unread-badge" class="absolute top-0 right-0 h-2 w-2 bg-red-500 rounded-full hidden"></span>
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" /></svg>
             </button>
-
-            <div class="relative ml-3">
-              <button id="pro-menu" class="relative flex rounded-full bg-gray-800 outline-none">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTre4TseOqU7NynnfZPa9QM2YuHLO9KdVPwrA&s" class="h-8 w-8 rounded-full" />
+            <div id="notif-dropdown" class="hidden absolute right-0 top-12 z-50 mt-2 w-80 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 py-2 overflow-y-auto max-h-96">
+                <div class="px-4 py-2 border-b border-gray-100"><h3 class="text-sm font-bold text-gray-700">Notifications</h3></div>
+                <div id="notif-list" class="divide-y divide-gray-100 text-sm"><p class="p-4 text-gray-500 text-center">Loading...</p></div>
+            </div>
+            <!-- Profile Dropdown -->
+            <div class="relative ml-4">
+              <button id="pro-menu" class="flex text-sm rounded-full bg-teal-800 text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 border border-teal-600 p-1 px-3">
+                 Profile <svg class="ml-1 w-4 h-4 translate-y-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
               </button>
-
-              <div id="user" class="hidden absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-gray-800 py-1">
-                <a href="profile.html" class="block px-4 py-2 text-sm text-gray-300 focus:bg-white/5 focus:outline-hidden" >Profile</a>
-                <a href="registration.html" class="block px-4 py-2 text-sm text-gray-300 focus:bg-white/5 focus:outline-hidden" >Registration</a>
-                <button onclick="logout()"class="w-full text-left block px-4 py-2 text-gray-300 text-sm hover:bg-white"> Logout</button>
+              <div id="user-dropdown" class="hidden absolute right-0 z-50 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5">
+                <div class="px-4 py-2 border-b border-slate-100"><p id="nav-user-name" class="text-sm font-bold text-slate-800"></p><p id="nav-user-role" class="text-xs text-slate-500 capitalize"></p></div>
+                <a href="profile.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-100">My Profile</a>
+                <a href="registration.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-100">My Registrations</a>
+                <button onclick="auth.logout()" class="w-full text-left block px-4 py-2 text-sm text-red-600 hover:bg-slate-100 font-bold border-t border-slate-100">Logout</button>
               </div>
             </div>
           </div>
         </div>
       </div>
-
-      <div id="mobile-menu" hidden class="block sm:hidden">
-        <div class="space-y-1 px-2 pt-2 pb-3">
-          <a href="admin.html" id="admin" class="hidden rounded-md px-3 py-2 text-sm font-medium text-indigo-400 hover:text-white" >Admin Dashboard</a>
-                <a href="event.html" aria-current="page" class="rounded-md bg-gray-950/50 px-3 py-2 text-sm font-medium text-white">Event</a>
-                <a href="announcement.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Announcements</a>
-                <a href="promo.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Promos</a>
-                <a href="services.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Services</a>
+      <!-- Mobile menu -->
+      <div id="mobile-menu" class="hidden sm:hidden bg-teal-900 absolute w-full z-40 border-t border-teal-800 shadow-xl">
+        <div class="space-y-1 px-2 pt-2 pb-3 shadow-lg">
+          <a href="admin-dashboard.html" class="admin-only hidden block rounded-md px-3 py-2 text-base font-medium text-teal-300">Admin Dashboard</a>
+          <a href="event.html" class="bg-teal-800 text-white block rounded-md px-3 py-2 text-base font-medium">Events</a>
+          <a href="announcement.html" class="text-teal-100 block rounded-md px-3 py-2 text-base font-medium">Announcements</a>
+          <a href="promo.html" class="text-teal-100 block rounded-md px-3 py-2 text-base font-medium">Promos</a>
+          <a href="services.html" class="text-teal-100 block rounded-md px-3 py-2 text-base font-medium">Services</a>
         </div>
       </div>
     </nav>
-    <div class="mx-auto w-full max-7xl flex flex-col gap-6 p-4 md:flex-row ">
-      <aside class="w-full md:w-64 bg-white rounded-lg shadow p-4 hidden md:block sticky top-10">
-        <h3 class="text-gray-500 mb-4">Menu</h3>
-        <nav class="space-y-1">
-          <a href="admin-dashboard.html" class="flex text-gray-600 items-center hover:bg-gray-50 px-3 py-2 text-sm rounded-md" >Users</a>
-          <a href="admin-event.html" class="flex text-gray-600 items-center hover:bg-gray-50 px-3 py-2 text-sm rounded-md">Add Event</a>
-          <a href="admin-promo.html" class="flex text-gray-600 items-center hover:bg-gray-50 px-3 py-2 text-sm rounded-md">Add Promo</a>
-          <a href="admin-announcement.html" class="flex text-gray-600 items-center hover:bg-gray-50 px-3 py-2 text-sm rounded-md">Announcement</a>
-          <button onclick="logout()" class="w-full flex rounded-md text-red-600 hover:bg-red-50 px-3 py-2 ">Logout</button>
-       </nav>
-      </aside>
-      <div class="flex-1 bg-white rounded shadow-md border border-gray-100">
-        <div class="border border-gray-50 p-6">
-          <h2 id="f-title" class="text-teal-950 text-xl">Create A New Event</h2>
+
+    <main class="grow flex flex-col p-4 sm:p-8">
+      <div class="mx-auto w-full max-w-3xl">
+        
+        <div class="flex items-center justify-between mb-8">
+            <h1 id="page-title" class="text-3xl font-extrabold text-teal-950">Create New Event</h1>
+            <a href="event.html" class="text-teal-700 hover:text-teal-900 font-medium">Cancel</a>
         </div>
-        <form id="form" class="space-y-5 p-8">
-          <input type="hidden" id="id">
-          <div class="grid grid-cols gap-5">
-            <div>
-              <label for="event-title" class="block text-gray-500" >Event Title</label>
-              <input type="text" id="title" class="w-full border border-gray-200 rounded-lg p-2" required>
-            </div>
-            <div>
-              <label for="desc" class="block text-gray-500">Description</label>
-              <textarea id="desc" rows="5" cols="80"  class="border" required ></textarea>
-            </div>
-            <div class="grid grid-cols gap-5 md:grid-cols-2">
-              <div>
-                <label for="location" class="block text-gray-500">Location</label>
-                <input type="text" id="location" class="w-full border-gray-200 border rounded-lg p-2" required>
-              </div>
-              <div>
-                <label for="start" class="block text-gray-500">Starts At</label>
-                <input type="datetime-local" id="start" class="w-full border-gray-200 border rounded-lg p-2" required>
-              </div>
-              <div>
-                <label for="end" class="block text-gray-500">Ends At</label>
-                <input type="datetime-local" id="end" class="w-full border-gray-200 border rounded-lg p-2" required>
-              </div>
-            </div>
-            <div>
-              <label for="image" class="block text-gray-500">Event Image</label>
-              <div class="flex items-center gap-4 p-4 border-2 border-dashed border-gray-200 rounded-xl">
-                <input type="file" id="image" class="text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-bold file:bg-teal-50 file:text-teal-700 hover:file:bg-teal-100">
-              <img id="event-img" src="" class="hidden h-16 w-16 object-cover rounded-lg shadow-sm border border-gray-200">
+
+        <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8">
+            <form id="eventForm" class="space-y-6" enctype="multipart/form-data">
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-bold text-slate-700 mb-2">Event Title</label>
+                        <input type="text" id="title" name="title" required class="w-full rounded-md border border-slate-300 px-4 py-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-colors" placeholder="e.g. City Summer Festival">
+                    </div>
+                    
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-bold text-slate-700 mb-2">Location / Map Link</label>
+                        <input type="text" id="location" name="location" required class="w-full rounded-md border border-slate-300 px-4 py-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-colors" placeholder="e.g. Central Park or https://maps.google.com/...">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold text-slate-700 mb-2">Start Date & Time</label>
+                        <input type="datetime-local" id="starts_at" name="starts_at" required class="w-full rounded-md border border-slate-300 px-4 py-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-colors">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold text-slate-700 mb-2">End Date & Time</label>
+                        <input type="datetime-local" id="ends_at" name="ends_at" required class="w-full rounded-md border border-slate-300 px-4 py-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-colors">
+                    </div>
+
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-bold text-slate-700 mb-2">Description</label>
+                        <textarea id="description" name="description" rows="5" required class="w-full rounded-md border border-slate-300 px-4 py-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-colors" placeholder="Describe the wonderful event..."></textarea>
+                    </div>
+
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-bold text-slate-700 mb-2">Event Image</label>
+                        <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-slate-300 border-dashed rounded-md bg-slate-50 hover:bg-slate-100 transition-colors cursor-pointer" onclick="document.getElementById('image').click()">
+                            <div class="space-y-1 text-center" id="img-preview-container">
+                                <svg class="mx-auto h-12 w-12 text-slate-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
+                                    <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                                <div class="flex text-sm text-slate-600 justify-center">
+                                    <span class="relative cursor-pointer bg-white rounded-md font-medium text-teal-600 hover:text-teal-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-teal-500">
+                                        <span class="px-1">Upload a file</span>
+                                        <input id="image" name="image" type="file" class="sr-only" accept="image/png, image/jpeg, image/jpg, image/webp">
+                                    </span>
+                                    <p class="pl-1">or drag and drop</p>
+                                </div>
+                                <p class="text-xs text-slate-500">PNG, JPG, WEBP up to 5MB</p>
+                            </div>
+                            <img id="img-preview" src="" class="hidden max-h-48 rounded object-cover">
+                        </div>
+                    </div>
+
+                    <div class="md:col-span-2 flex items-center mt-2">
+                        <input id="published" name="published" type="checkbox" checked class="h-5 w-5 text-teal-600 focus:ring-teal-500 border-gray-300 rounded cursor-pointer">
+                        <label for="published" class="ml-3 block text-sm font-bold text-slate-700 cursor-pointer">
+                            Publish Event Immediately
+                        </label>
+                    </div>
+                </div>
+
+                <div class="pt-6 border-t border-slate-200 flex justify-end">
+                    <button type="submit" id="submitBtn" class="bg-teal-700 text-white px-8 py-3 rounded-lg font-bold text-lg hover:bg-teal-800 transition shadow-md min-w-[150px]">
+                        Save Event
+                    </button>
+                </div>
+            </form>
         </div>
-        <div class="flex justify-end pt-6 gap-3">
-          <button type="button" id="delete" class="text-red-500 hover:br-red-50 rounbed-lg hidden px-6">Delete</button>
-          <button id="submit" class="bg-teal-600 text-white px-8 py-2 rounded-lg shadow-lg hover:bg-teal-700">Save</button>
-        </div>
-      </form>
-    </div>
-  </div>
+
+      </div>
     </main>
-    <footer class="bg-teal-950 text-center text-surface/75 dark:bg-neutral-700 dark:text-white/75 lg:text-left">
+
+    <!-- Footer -->
+            <footer class="bg-teal-950 text-teal-100 text-center lg:text-left mt-auto">
   <div class="mx-6 py-10 text-center md:text-left">
     <div class="grid-1 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
       <div class="">
@@ -140,23 +164,24 @@
           Your accessible portal for city events and community services. Stay connected with what's happening in your city.
         </p>
       </div>
+      <!--link section -->
       <div>
          <h6
           class="mb-4 flex justify-center font-semibold uppercase md:justify-start">
           Website Links
         </h6>
         <p class="mb-4">
-          <a href="event.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Event</a>
+          <a href="event.html" class="rounded-md px-3 py-2 text-sm font-medium text-teal-300 hover:bg-white/5 hover:text-white">Event</a>
         </p>
         <p class="mb-4">
-          <a href="announcement.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Announcements</a>
+          <a href="announcement.html" class="rounded-md px-3 py-2 text-sm font-medium text-teal-300 hover:bg-white/5 hover:text-white">Announcements</a>
         </p>
         <p class="mb-4">
-          <a href="promo.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Promos</a>
+          <a href="promo.html" class="rounded-md px-3 py-2 text-sm font-medium text-teal-300 hover:bg-white/5 hover:text-white">Promos</a>
 
         </p>
         <p>
-          <a href="services.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Services</a>
+          <a href="services.html" class="rounded-md px-3 py-2 text-sm font-medium text-teal-300 hover:bg-white/5 hover:text-white">Services</a>
         </p>
       </div>
       <div>
@@ -224,94 +249,131 @@
     </div>
   </div>
 
-  <div class="bg-black/5 p-6 text-center">
+  <!--Copyright section-->
+  <div class="bg-teal-900/50 p-6 text-center border-t border-teal-800">
     <span>© 2026 Copyright.CivicEvents</span>
   </div>
 </footer>
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> 
-<script src="./js/api.js"></script>
-<script src="./js/auth.js"></script>
-<script>
-  const token = localStorage.getItem('token');
-  const API_URL = 'http://localhost:4000/api/events';
 
-  $(document).ready(() => {
-    const edit = new URLSearchParams(window.location.search).get('edit');
+    <!-- Toast -->
+    <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300">
+        <div id="toast-content" class="flex items-center px-6 py-4 rounded-xl shadow-2xl text-white font-medium">
+            <span id="toast-message"></span>
+        </div>
+    </div>
 
-    $('#image').on('change', function() {
-      const file = this.files[0];
-      if(file) {
-        const reader = new FileReader();
-        reader.onload = (e) => $('#event-img').attr('src', e.target.result).removeClass('hidden');
-        reader.readAsDataURL(file);
-      }
-    });
-
-    if(edit) {
-      $('#f-title').text('Edit Event');
-      $('#submit').text('Update Changes');
-      $('#delete').removeClass('hidden');
-
-      fetch(`${API_URL}/${edit}`)
-        .then(res => res.json())
-        .then(data => {
-          $('#id').val(data.id);
-          $('#title').val(data.title);
-          $('#desc').val(data.description);
-          $('#location').val(data.location);
-          if(data.start) $('#start').val(new Date(data.start).toISOString().slice(0, 16));
-          if(data.end) $('#end').val(new Date(data.end).toISOString().slice(0, 16));
-          if(data.image_url) $('#event-img').attr('src', data.image_url).removeClass('hidden');
-        });
-    }
-
-    $('#form').on('submit', async function(e) {
-      e.preventDefault();
-      const id = $('#id').val();
-      
-      const formData = new FormData();
-      formData.append('title', $('#title').val());
-      formData.append('description', $('#desc').val());
-      formData.append('location', $('#location').val());
-      formData.append('start', $('#start').val());
-      formData.append('end', $('#end').val());
-      
-      const fileInput = $('#image')[0].files[0];
-      if (fileInput) formData.append('image', fileInput);
-
-      const method = id ? 'PATCH' : 'POST';
-      const url = id ? `${API_URL}/${id}` : API_URL;
-
-      try {
-        const response = await fetch(url, {
-          method: method,
-          headers: { 'Authorization': `Bearer ${token}` },
-          body: formData 
-        });
-
-        if (response.ok) {
-          alert('Success!');
-          window.location.href = 'admin-dashboard.html';
-        } else {
-          const err = await response.json();
-          alert(`Save failed: ${err.message || 'Check console'}`);
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> 
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+      $(document).ready(function(){
+        // Ensure only admins can access this page
+        auth.enforceRole(['admin']);
+        auth.setupNavigation();
+        
+        const currentUser = auth.getUser();
+        if(currentUser) {
+            $('#nav-user-name').text(currentUser.full_name);
+            $('#nav-user-role').text(currentUser.role);
         }
-      } catch (error) {
-        console.error("Submission error:", error);
-      }
-    });
 
-    $('#delete').on('click', async function() {
-      if (confirm('Are you sure you want to delete this event?')) {
-        const id = $('#id').val();
-        await fetch(`${API_URL}/${id}`, {
-          method: 'DELETE',
-          headers: { 'Authorization': `Bearer ${token}` }
+        // Standard interactions
+        $('#mob-menu').click(() => $('#mobile-menu').toggleClass('hidden'));
+        $('#bell').click(e => { e.stopPropagation(); $('#notif-dropdown').toggleClass('hidden'); $('#user-dropdown').addClass('hidden'); });
+
+        Api.call('/api/notifications', 'GET').done(function(nots){
+            if(nots.filter(n => !n.is_read).length > 0) $('#unread-badge').removeClass('hidden');
         });
-        window.location.href = 'admin-dashboard.html';
-      }
-    });
-  });
-</script>
-</body>
+
+        function showMessage(msg, isErr = false) {
+            $('#toast-content').removeClass('bg-teal-600 bg-red-600').addClass(isErr ? 'bg-red-600' : 'bg-teal-600');
+            $('#toast-message').text(msg);
+            $('#toast').removeClass('translate-y-20 opacity-0');
+            setTimeout(() => $('#toast').addClass('translate-y-20 opacity-0'), 3000);
+        }
+
+        const params = new URLSearchParams(window.location.search);
+        let eventId = params.get('id');
+        let isEdit = !!eventId;
+
+        if (isEdit) {
+            $('#page-title').text('Edit Event');
+            $('#submitBtn').text('Update Event');
+            
+            // Load existing details
+            Api.call('/api/events/' + eventId, 'GET').done(function(event){
+                $('#title').val(event.title);
+                $('#location').val(event.location);
+                $('#description').val(event.description);
+                if(event.starts_at) $('#starts_at').val(event.starts_at.slice(0, 16)); // Format for datetime-local
+                if(event.ends_at) $('#ends_at').val(event.ends_at.slice(0, 16));
+                $('#published').prop('checked', event.published !== false);
+
+                const file = event.image_url || event.metadata?.image_url;
+                if(file) {
+                    let imgUrl = file.startsWith('http') ? file : `http://localhost:4000/uploads/events/${file}`;
+                    $('#img-preview').attr('src', imgUrl).removeClass('hidden');
+                    $('#img-preview-container').addClass('hidden');
+                }
+            }).fail(function(){
+                showMessage("Could not load event data.", true);
+                setTimeout(() => window.location.href = 'event.html', 1500);
+            });
+        }
+
+        // Image Preview Handler
+        $('#image').change(function() {
+            if (this.files && this.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#img-preview').attr('src', e.target.result).removeClass('hidden');
+                    $('#img-preview-container').addClass('hidden');
+                };
+                reader.readAsDataURL(this.files[0]);
+            }
+        });
+
+        // Form Submit flow
+        $('#eventForm').on('submit', function(e) {
+            e.preventDefault();
+            
+            const btn = $('#submitBtn');
+            const originalText = btn.text();
+            btn.prop('disabled', true).text('Saving...').addClass('opacity-50');
+
+            // Collect data
+            const formData = new FormData();
+            formData.append('title', $('#title').val());
+            formData.append('location', $('#location').val());
+            formData.append('starts_at', $('#starts_at').val());
+            formData.append('ends_at', $('#ends_at').val());
+            formData.append('description', $('#description').val());
+            formData.append('published', $('#published').is(':checked'));
+
+            const fileInput = $('#image')[0];
+            if (fileInput.files.length > 0) {
+                formData.append('image', fileInput.files[0]);
+            }
+
+            // Route
+            let endpoint = '/api/events';
+            let method = 'POST';
+            if (isEdit) {
+                endpoint = '/api/events/' + eventId;
+                method = 'PUT'; // or PATCH
+            }
+
+            // Send via api.js
+            Api.call(endpoint, method, formData, true).done(function(){
+                showMessage(isEdit ? "Event updated successfully!" : "Event created successfully!");
+                setTimeout(() => window.location.href = 'event.html', 1500);
+            }).fail(function(err){
+                showMessage(err.responseJSON?.message || "Failed to save event.", true);
+                btn.prop('disabled', false).text(originalText).removeClass('opacity-50');
+            });
+        });
+
+      });
+    </script>
+  </body>
 </html>

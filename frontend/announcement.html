@@ -1,83 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Announcement</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Announcements - CivicEvents+</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="flex flex-col min-h-screen">
-     <main class="grow flex flex-col">
-    <nav class="relative bg-teal-950 border-b-2 border-teal-800 shadow-lg">
-      <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-        <div class="relative flex h-16 items-center justify-between">
-          <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
-            <button id="mob-menu" type="button" command="--toggle" commandfor="mobile-menu" class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-white/5 hover:text-white focus:outline-2 focus:-outline-offset-1 focus:outline-indigo-500">
-              <svg class="size-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
+
+<body class="bg-slate-50 flex flex-col min-h-screen text-slate-800 font-sans">
+  
+  <nav class="relative bg-teal-950 border-b border-teal-800 shadow-md">
+    <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+      <div class="relative flex h-16 items-center justify-between">
+        <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+            <button id="mob-menu" type="button" class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-white/5 hover:text-white">
+              <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/></svg>
             </button>
-          </div>
-          <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-            <div class="flex shrink-0 items-center">
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXdFae6GWB-DBtiL0kLto2aIUnR5G_c5bp_g&s" alt="profile" class="h-8 w-auto"/>
-            </div>
+        </div>
+        
+        <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+            <div class="flex shrink-0 items-center text-white font-bold">CivicEvents</div>
             <div class="hidden sm:ml-6 sm:block">
               <div class="flex space-x-4">
-                <a href="admin.html" id="admin" class="hidden rounded-md px-3 py-2 text-sm font-medium text-indigo-400 hover:text-white" >Admin Dashboard</a>
-                <a href="event.html" aria-current="page" class="rounded-md bg-teal-700 px-3 py-2 text-sm font-black text-white">Event</a>
-                <a href="announcement.html" class="rounded-md px-3 py-2 text-sm font-semibold text-teal-100 hover:bg-white/10 hover:text-white">Announcements</a>
-                <a href="promo.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Promos</a>
-                <a href="services.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Services</a>
+                <a href="admin-dashboard.html" class="admin-only hidden rounded-md px-3 py-2 text-sm font-medium text-teal-300 hover:text-white">Admin Dashboard</a>
+                <a href="event.html" class="rounded-md px-3 py-2 text-sm font-medium text-teal-100 hover:bg-white/10 hover:text-white">Events</a>
+                <a href="announcement.html" class="rounded-md bg-teal-800 px-3 py-2 text-sm font-bold text-white">Announcements</a>
+                <a href="promo.html" class="rounded-md px-3 py-2 text-sm font-medium text-teal-100 hover:bg-white/10 hover:text-white">Promos</a>
+                <a href="services.html" class="rounded-md px-3 py-2 text-sm font-medium text-teal-100 hover:bg-white/10 hover:text-white">Services</a>
               </div>
             </div>
-          </div>
-          <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-            <button id="bell" type="button" class="relative rounded-full p-1 text-gray-400 hover:text-white focus:outline-2 focus:outline-offset-2 focus:outline-indigo-500">
-              <span id="unread" class="absolute top-1 right-1 h-2 w-2 bg-red-500 rounded-full hidden"></span>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="size-6">
-                <path d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
+        </div>
+
+        <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+            <!-- Notifications -->
+            <button id="bell" type="button" class="relative rounded-full p-1 text-teal-300 hover:text-white focus:outline-none">
+              <span id="unread-badge" class="absolute top-0 right-0 h-2 w-2 bg-red-500 rounded-full hidden"></span>
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" /></svg>
             </button>
+            <div id="notif-dropdown" class="hidden absolute right-0 top-12 z-50 mt-2 w-80 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 py-2 overflow-y-auto max-h-96">
+                <div class="px-4 py-2 border-b border-gray-100"><h3 class="text-sm font-bold text-gray-700">Notifications</h3></div>
+                <div id="notif-list" class="divide-y divide-gray-100 text-sm"><p class="p-4 text-gray-500 text-center">Loading...</p></div>
+            </div>
 
-            <div class="relative ml-3">
-              <button id="pro-menu" class="relative flex rounded-full bg-gray-800 outline-none">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTre4TseOqU7NynnfZPa9QM2YuHLO9KdVPwrA&s" class="h-8 w-8 rounded-full" />
+            <!-- Profile Dropdown -->
+            <div class="relative ml-4">
+              <button id="pro-menu" class="flex text-sm rounded-full bg-teal-800 text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 border border-teal-600 p-1 px-3">
+                 Profile <svg class="ml-1 w-4 h-4 translate-y-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
               </button>
-
-              <div id="user" class="hidden absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-gray-800 py-1">
-                <a href="profile.html" class="block px-4 py-2 text-sm text-gray-300 focus:bg-white/5 focus:outline-hidden" >Profile</a>
-                <a href="registration.html" class="block px-4 py-2 text-sm text-gray-300 focus:bg-white/5 focus:outline-hidden" >Registration</a>
-                <button onclick="logout()"class="w-full text-left block px-4 py-2 text-gray-300 text-sm hover:bg-white"> Logout</button>
+              <div id="user-dropdown" class="hidden absolute right-0 z-50 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5">
+                <div class="px-4 py-2 border-b border-slate-100"><p id="nav-user-name" class="text-sm font-bold text-slate-800"></p><p id="nav-user-role" class="text-xs text-slate-500 capitalize"></p></div>
+                <a href="profile.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-100">My Profile</a>
+                <a href="registration.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-100">My Registrations</a>
+                <button onclick="auth.logout()" class="w-full text-left block px-4 py-2 text-sm text-red-600 hover:bg-slate-100 font-bold border-t border-slate-100">Logout</button>
               </div>
             </div>
-          </div>
         </div>
+      </div>
+    </div>
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="hidden sm:hidden bg-teal-900 absolute w-full z-40 border-t border-teal-800 shadow-xl">
+      <div class="space-y-1 px-2 pt-2 pb-3 shadow-lg">
+          <a href="admin-dashboard.html" class="admin-only hidden block rounded-md px-3 py-2 text-base font-medium text-teal-300">Admin Dashboard</a>
+          <a href="event.html" class="text-teal-100 block rounded-md px-3 py-2 text-base font-medium">Events</a>
+          <a href="announcement.html" class="bg-teal-800 text-white block rounded-md px-3 py-2 text-base font-medium">Announcements</a>
+          <a href="promo.html" class="text-teal-100 block rounded-md px-3 py-2 text-base font-medium">Promos</a>
+          <a href="services.html" class="text-teal-100 block rounded-md px-3 py-2 text-base font-medium">Services</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="grow flex flex-col p-4 sm:p-8">
+    <div class="mx-auto w-full max-w-7xl">
+      
+      <div class="flex justify-between items-center mb-8 border-b border-slate-200 pb-4">
+        <div>
+          <h1 class="text-3xl font-extrabold text-teal-950">City Announcements</h1>
+          <p class="text-slate-500 mt-2 text-sm sm:text-base">Listen to the latest audio updates and broadcasts from your city leadership.</p>
+        </div>
+        <a href="admin-announcement.html" class="admin-only hidden bg-teal-700 hover:bg-teal-800 text-white px-5 py-2 rounded shadow font-bold text-sm whitespace-nowrap">+ Create Announcement</a>
       </div>
 
-      <div id="mobile-menu" hidden class="block sm:hidden">
-        <div class="space-y-1 px-2 pt-2 pb-3">
-          <a href="admin.html" id="admin" class="hidden rounded-md px-3 py-2 text-sm font-medium text-indigo-400 hover:text-white" >Admin Dashboard</a>
-                <a href="event.html" aria-current="page" class="rounded-md bg-gray-950/50 px-3 py-2 text-sm font-medium text-white">Event</a>
-                <a href="announcement.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Announcements</a>
-                <a href="promo.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Promos</a>
-                <a href="services.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Services</a>
-        </div>
-      </div>
-    </nav>
-      <div class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 w-full">
-        <div class="mb-8">
-        <h1 class="text-3xl font-bold text-teal-950">Community Announcements</h1>
-        <p class="text-slate-500">Listen to important city updates and announcements.</p>
-      </div>
       <div id="loading" class="text-center py-20 text-gray-500">
-        <p class="animate-pulse">No announcements available</p>
+        <p class="animate-pulse font-medium">Loading announcements...</p>
       </div>
-      <div id="announce" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
-        <p id="empty" class="hidden text-gray-500 text-center py-20 italic">No promos available at the moment.</p>
+
+      <div id="announce-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- populated by js -->
+      </div>
+      <p id="empty" class="hidden text-slate-500 text-center py-20 italic">No announcements available at the moment.</p>
+
     </div>
-    </main>
-    <footer class="bg-teal-950 text-center text-surface/75 dark:bg-neutral-700 dark:text-white/75 lg:text-left">
+  </main>
+
+          <footer class="bg-teal-950 text-teal-100 text-center lg:text-left mt-auto">
   <div class="mx-6 py-10 text-center md:text-left">
     <div class="grid-1 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
       <div class="">
@@ -105,17 +121,17 @@
           Website Links
         </h6>
         <p class="mb-4">
-          <a href="event.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Event</a>
+          <a href="event.html" class="rounded-md px-3 py-2 text-sm font-medium text-teal-300 hover:bg-white/5 hover:text-white">Event</a>
         </p>
         <p class="mb-4">
-          <a href="announcement.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Announcements</a>
+          <a href="announcement.html" class="rounded-md px-3 py-2 text-sm font-medium text-teal-300 hover:bg-white/5 hover:text-white">Announcements</a>
         </p>
         <p class="mb-4">
-          <a href="promo.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Promos</a>
+          <a href="promo.html" class="rounded-md px-3 py-2 text-sm font-medium text-teal-300 hover:bg-white/5 hover:text-white">Promos</a>
 
         </p>
         <p>
-          <a href="services.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Services</a>
+          <a href="services.html" class="rounded-md px-3 py-2 text-sm font-medium text-teal-300 hover:bg-white/5 hover:text-white">Services</a>
         </p>
       </div>
       <div>
@@ -184,17 +200,128 @@
   </div>
 
   <!--Copyright section-->
-  <div class="bg-black/5 p-6 text-center">
+  <div class="bg-teal-900/50 p-6 text-center border-t border-teal-800">
     <span>© 2026 Copyright.CivicEvents</span>
   </div>
 </footer>
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> 
-<script src="./js/api.js"></script>
-<script src="./js/auth.js"></script>
-<script>
-  $('#mob-menu').on('click', function() {
-        $('#mobile-menu').toggle();
+
+  <!-- Toast -->
+  <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300">
+      <div id="toast-content" class="flex items-center px-6 py-4 rounded-xl shadow-2xl text-white font-medium bg-teal-600">
+          <span id="toast-message"></span>
+      </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="./js/api.js"></script>
+  <script src="./js/auth.js"></script>
+  <script>
+    $(document).ready(function() {
+        auth.enforceRole(['admin', 'user']);
+        auth.setupNavigation();
+        const currentUser = auth.getUser();
+        
+        if(currentUser) {
+            $('#nav-user-name').text(currentUser.full_name);
+            $('#nav-user-role').text(currentUser.role);
+        }
+
+        // Layout interactions
+        $('#mob-menu').click(() => $('#mobile-menu').toggleClass('hidden'));
+        $('#bell').click(e => { e.stopPropagation(); $('#notif-dropdown').toggleClass('hidden'); $('#user-dropdown').addClass('hidden'); });
+        
+        // Notifications
+        Api.call('/api/notifications', 'GET').done(function(nots){
+            if(nots.filter(n => !n.is_read).length > 0) $('#unread-badge').removeClass('hidden');
+        });
+
+        // Load Announcements
+        function loadAnnouncements() {
+            $('#loading').removeClass('hidden');
+            $('#empty').addClass('hidden');
+            $('#announce-list').empty();
+
+            Api.call('/api/announcements', 'GET').done(function(res) {
+                $('#loading').addClass('hidden');
+                
+                let data = Array.isArray(res) ? res : (res.data || []);
+                
+                if (data.length === 0) {
+                    $('#empty').removeClass('hidden');
+                    return;
+                }
+
+                data.forEach(function(item) {
+                    // Normal users only see published
+                    if (item.published === false && currentUser.role !== 'admin') return;
+
+                    const dateObj = new Date(item.created_at);
+                    const dateStr = dateObj.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' });
+                    
+                    const file = item.audio_url || (item.metadata && item.metadata.audio_url);
+                    let audioUrl = file;
+                    if(file && !file.startsWith('http')) {
+                         audioUrl = `http://localhost:4000/uploads/announcements/${file}`;
+                         if(file.includes('/uploads/')) audioUrl = `http://localhost:4000${file}`;
+                    }
+
+                    const adminHtml = currentUser.role === 'admin' ? `
+                       <div class="mt-4 flex gap-2 w-full pt-3 border-t border-slate-100">
+                           <button onclick="deleteAnnounce(${item.id}, this)" class="flex-1 bg-red-50 text-red-600 py-1.5 rounded text-sm hover:bg-red-100 font-medium">Delete</button>
+                       </div>
+                    ` : '';
+
+                    const durationStr = item.duration_seconds ? `<span class="text-xs bg-slate-100 px-2 py-1 rounded text-slate-500 font-medium">${item.duration_seconds} sec</span>` : '';
+
+                    const card = `
+                    <div class="bg-white rounded-xl overflow-hidden shadow-sm border border-slate-200 p-5 flex flex-col hover:shadow-md transition">
+                        <div class="flex justify-between flex-wrap items-start mb-3 gap-2">
+                           <h3 class="font-bold text-teal-950 text-lg leading-tight line-clamp-2">${item.title}</h3>
+                           ${item.published === false ? '<span class="px-2 py-1 bg-gray-200 text-gray-600 text-xs rounded-full whitespace-nowrap">Draft</span>' : ''}
+                        </div>
+                        <div class="flex gap-2 mb-4 items-center">
+                            <span class="text-xs text-slate-400">${dateStr}</span>
+                            ${durationStr}
+                        </div>
+                        
+                        <div class="mt-auto pt-2">
+                            <!-- Accessible Audio Player -->
+                            <audio controls aria-label="Audio recording for ${item.title}" class="w-full h-10 outline-none focus:ring-2 focus:ring-teal-500 rounded-full">
+                                <source src="${audioUrl}" type="audio/mpeg">
+                                <source src="${audioUrl}" type="audio/wav">
+                                Your browser does not support the audio element.
+                            </audio>
+                        </div>
+                        
+                        ${adminHtml}
+                    </div>
+                    `;
+                    $('#announce-list').append(card);
+                });
+                
+                if ($('#announce-list').children().length === 0) {
+                     $('#empty').removeClass('hidden');
+                }
+            }).fail(function() {
+                $('#loading').html('<p class="text-red-500 bg-red-50 p-4 rounded inline-block">Failed to load announcements.</p>');
+            });
+        }
+
+        loadAnnouncements();
+
+        window.deleteAnnounce = function(id, btn) {
+            if(!confirm('Are you sure you want to delete this announcement?')) return;
+            const card = $(btn).closest('.bg-white');
+            $(btn).prop('disabled', true).text('Deleting...');
+            
+            Api.call('/api/announcements/' + id, 'DELETE').done(function(){
+                card.fadeOut(300, function() { $(this).remove(); });
+            }).fail(function(err){
+                alert(err.responseJSON?.message || 'Failed to delete announcement.');
+                $(btn).prop('disabled', false).text('Delete');
+            });
+        };
     });
-</script>
+  </script>
 </body>
 </html>
