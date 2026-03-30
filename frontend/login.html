@@ -2,109 +2,96 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login </title>
-    <script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login </title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body class="bg-slate-50 flex flex-col min-h-screen text-slate-800 font-sans">
 
-    <header class="bg-teal-950 p-4 shadow-md">
-        <div class="max-w-7xl mx-auto flex items-center justify-center">
-            <h1 class="text-white text-xl font-bold flex items-center">
-                <svg class="h-6 w-6 mr-2 text-teal-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                    fill="currentColor">
-                    <path
-                        d="M12.378 1.602a.75.75 0 00-.756 0L3 6.632l9 5.25 9-5.25-8.622-5.03zM21.75 7.93l-9 5.25v9l8.628-5.032a.75.75 0 00.372-.648V7.93zM11.25 22.18v-9l-9-5.25v8.57a.75.75 0 00.372.648l8.628 5.033z" />
-                </svg>
-                CivicEvents
-            </h1>
+  <main class="flex-grow flex items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
+    <section class="max-w-md w-full space-y-8 bg-white p-8 rounded-xl shadow-xl border border-teal-100">
+      <div>
+        <h2 class="mt-2 text-center text-3xl font-extrabold text-teal-950">Welcome Back</h2>
+        <p class="mt-2 text-center text-sm text-slate-600">Please sign in to your account</p>
+      </div>
+
+      <form id="form" class="mt-8 space-y-6" action="#" method="POST">
+        <div class="rounded-md shadow-sm space-y-4">
+          <div>
+            <label for="email" class="block text-sm font-medium text-slate-700">Email address</label>
+            <input id="email" name="email" type="email" autocomplete="email" required
+              class="mt-1 appearance-none relative block w-full px-3 py-2 border border-slate-300 placeholder-slate-500 text-slate-900 rounded-md focus:outline-none focus:ring-teal-500 focus:border-teal-500 focus:z-10 sm:text-sm"
+              placeholder="Email address">
+          </div>
+          <div>
+            <label for="password" class="block text-sm font-medium text-slate-700">Password</label>
+            <input id="password" name="password" type="password" autocomplete="current-password" required
+              class="mt-1 appearance-none relative block w-full px-3 py-2 border border-slate-300 placeholder-slate-500 text-slate-900 rounded-md focus:outline-none focus:ring-teal-500 focus:border-teal-500 focus:z-10 sm:text-sm"
+              placeholder="Password">
+          </div>
         </div>
-    </header>
 
-    <main class="flex-grow flex items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
-        <section class="max-w-md w-full space-y-8 bg-white p-8 rounded-xl shadow-xl border border-teal-100">
-            <div>
-                <h2 class="mt-2 text-center text-3xl font-extrabold text-teal-950">Welcome Back</h2>
-                <p class="mt-2 text-center text-sm text-slate-600">Please sign in to your account</p>
-            </div>
+        <div>
+          <button type="submit"
+            class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-teal-700 hover:bg-teal-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 transition-colors shadow-md">
+            Sign in
+          </button>
+        </div>
+      </form>
 
-            <form id="form" class="mt-8 space-y-6" action="#" method="POST">
-                <div class="rounded-md shadow-sm space-y-4">
-                    <div>
-                        <label for="email" class="block text-sm font-medium text-slate-700">Email address</label>
-                        <input id="email" name="email" type="email" autocomplete="email" required
-                            class="mt-1 appearance-none relative block w-full px-3 py-2 border border-slate-300 placeholder-slate-500 text-slate-900 rounded-md focus:outline-none focus:ring-teal-500 focus:border-teal-500 focus:z-10 sm:text-sm"
-                            placeholder="Email address">
-                    </div>
-                    <div>
-                        <label for="password" class="block text-sm font-medium text-slate-700">Password</label>
-                        <input id="password" name="password" type="password" autocomplete="current-password" required
-                            class="mt-1 appearance-none relative block w-full px-3 py-2 border border-slate-300 placeholder-slate-500 text-slate-900 rounded-md focus:outline-none focus:ring-teal-500 focus:border-teal-500 focus:z-10 sm:text-sm"
-                            placeholder="Password">
-                    </div>
-                </div>
+      <p class="mt-4 text-center text-sm text-slate-600">
+        No Account?
+        <a href="signup.html" class="font-semibold text-teal-600 hover:text-teal-500">Sign Up</a>
+      </p>
+      <div id="error-msg" class="hidden mt-4 bg-red-50 border-l-4 border-red-400 p-4">
+        <p class="text-sm text-red-700"></p>
+      </div>
+    </section>
+  </main>
 
-                <div>
-                    <button type="submit"
-                        class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-teal-700 hover:bg-teal-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 transition-colors shadow-md">
-                        Sign in
-                    </button>
-                </div>
-            </form>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('#form').on('submit', function (e) {
+        e.preventDefault();
+        $('#error-msg').addClass('hidden');
 
-            <p class="mt-4 text-center text-sm text-slate-600">
-                Not a member?
-                <a href="signup.html" class="font-semibold text-teal-600 hover:text-teal-500">Sign Up</a>
-            </p>
-            <div id="error-msg" class="hidden mt-4 bg-red-50 border-l-4 border-red-400 p-4">
-                <p class="text-sm text-red-700"></p>
-            </div>
-        </section>
-    </main>
+        var logindata = {
+          email: $('#email').val(),
+          password: $('#password').val()
+        };
 
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="js/api.js"></script>
-    <script src="js/auth.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('#form').on('submit', function (e) {
-                e.preventDefault();
-                $('#error-msg').addClass('hidden');
+        const btn = $(this).find('button[type="submit"]');
+        const originalText = btn.text();
+        btn.text('Signing in...').prop('disabled', true).addClass('opacity-75');
 
-                var logindata = {
-                    email: $('#email').val(),
-                    password: $('#password').val()
-                };
+        Api.call('/api/auth/login', 'POST', logindata)
+          .done(function (res) {
+            const data = res.data || res; // fallback if data is wrapped
+            localStorage.setItem('token', data.token);
+            localStorage.setItem('user', JSON.stringify(data.user));
 
-                const btn = $(this).find('button[type="submit"]');
-                const originalText = btn.text();
-                btn.text('Signing in...').prop('disabled', true).addClass('opacity-75');
-
-                Api.call('/api/auth/login', 'POST', logindata)
-                    .done(function (res) {
-                        const data = res.data || res; // fallback if data is wrapped
-                        localStorage.setItem('token', data.token);
-                        localStorage.setItem('user', JSON.stringify(data.user));
-
-                        // Redirect based on role
-                        if (data.user && data.user.role === 'admin') {
-                            window.location.href = 'admin-dashboard.html';
-                        } else {
-                            window.location.href = 'event.html';
-                        }
-                    })
-                    .fail(function (err) {
-                        const msg = err.responseJSON ? err.responseJSON.message : 'Login failed. Please try again.';
-                        $('#error-msg').removeClass('hidden').find('p').text(msg);
-                    })
-                    .always(function () {
-                        btn.text(originalText).prop('disabled', false).removeClass('opacity-75');
-                    });
-            });
-        });
-    </script>
+            // Redirect based on role
+            if (data.user && data.user.role === 'admin') {
+              window.location.href = 'admin-dashboard.html';
+            } else {
+              window.location.href = 'event.html';
+            }
+          })
+          .fail(function (err) {
+            const msg = err.responseJSON ? err.responseJSON.message : 'Login failed. Please try again.';
+            $('#error-msg').removeClass('hidden').find('p').text(msg);
+          })
+          .always(function () {
+            btn.text(originalText).prop('disabled', false).removeClass('opacity-75');
+          });
+      });
+    });
+  </script>
 </body>
 
 </html>

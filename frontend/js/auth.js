@@ -48,24 +48,44 @@ const auth = {
     setupNavigation() {
         const user = this.getUser();
         if (user && user.role === 'admin') {
-            $('.admin-only').removeClass('hidden'); // Show any element with class admin-only
+            $('.admin-only').removeClass('hidden');
+            $('.user-only').remove();
         } else {
-            $('.admin-only').remove(); // Completely remove admin links for normal users
+            $('.admin-only').remove();
         }
 
-        // Show user avatar dropdown logic if exists
+        // Toggle User Dropdown
         $('#pro-menu').on('click', function (e) {
             e.stopPropagation();
             $('#user-dropdown').toggleClass('hidden');
+            $('#notif-dropdown').addClass('hidden'); // Close other dropdown
         });
 
-        // Hide dropdown when clicking outside
-        $(document).on('click', function () {
-            $('#user-dropdown').addClass('hidden');
-        });
-
-        $('#user-dropdown').on('click', function (e) {
+        // Toggle Notifications Dropdown
+        $('#bell').on('click', function (e) {
             e.stopPropagation();
+            $('#notif-dropdown').toggleClass('hidden');
+            $('#user-dropdown').addClass('hidden'); // Close other dropdown
+            
+            // If the page has a loadNotifications function, call it
+            if (typeof window.loadNotifications === 'function') {
+                window.loadNotifications();
+            }
+        });
+
+        // Hide dropdowns when clicking outside
+        $(document).on('click', function () {
+            $('#user-dropdown, #notif-dropdown').addClass('hidden');
+        });
+
+        // Prevent closing when clicking inside dropdowns
+        $('#user-dropdown, #notif-dropdown').on('click', function (e) {
+            e.stopPropagation();
+        });
+
+        // Mobile Menu Toggle
+        $('#mob-menu').on('click', function() {
+            $('#mobile-menu').toggleClass('hidden');
         });
     }
 };

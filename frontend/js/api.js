@@ -38,6 +38,34 @@ const Api = {
     isAuthenticated: function(){
         return (localStorage.getItem('token') || sessionStorage.getItem('token')) !== null;
     },
+    /**
+     * Resovles a media path to a full URL using the dynamic base_url.
+     * Handles: full URLs, relative paths starting with /, and filenames.
+     */
+    resolveMediaUrl: function(path, type = 'events') {
+        if (!path) return null;
+        if (path.startsWith('http')) return path;
+        
+        // If it starts with /uploads, just prepend base_url
+        if (path.startsWith('/uploads')) return `${base_url}${path}`;
+        
+        // Otherwise, assume it's just a filename and needs the full path
+        return `${base_url}/uploads/${type}/${path}`;
+    },
+
+    /**
+     * Safely parses metadata if Postgres returns it as a string instead of an object.
+     */
+    parseMetadata: function(metadata) {
+        if (!metadata) return {};
+        if (typeof metadata === 'object') return metadata;
+        try {
+            return JSON.parse(metadata);
+        } catch (e) {
+            console.error('Failed to parse metadata:', e);
+            return {};
+        }
+    },
     getUserRole: function(){
         const userStr = localStorage.getItem('user') || sessionStorage.getItem('user');
         if (!userStr) return null;

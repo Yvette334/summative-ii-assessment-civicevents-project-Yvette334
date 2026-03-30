@@ -14,83 +14,56 @@
     <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
       <div class="relative flex h-16 items-center justify-between">
         <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
-          <button id="mob-menu" type="button"
-            class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-white/5 hover:text-white">
+          <button id="mob-menu" type="button" class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-white/5 hover:text-white">
             <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
             </svg>
           </button>
         </div>
         <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-          <div class="flex shrink-0 items-center text-white font-bold">CivicEvents</div>
+          <div class="flex shrink-0 items-center">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXdFae6GWB-DBtiL0kLto2aIUnR5G_c5bp_g&s" alt="Logo" class="h-8 w-auto rounded"/>
+          </div>
           <div class="hidden sm:ml-6 sm:block">
             <div class="flex space-x-4">
-              <a href="admin-dashboard.html"
-                class="admin-only hidden rounded-md px-3 py-2 text-sm font-medium text-teal-300 hover:text-white">Admin
-                Dashboard</a>
-              <a href="event.html"
-                class="rounded-md px-3 py-2 text-sm font-medium text-teal-100 hover:bg-white/10 hover:text-white">Events</a>
-              <a href="announcement.html"
-                class="rounded-md px-3 py-2 text-sm font-medium text-teal-100 hover:bg-white/10 hover:text-white">Announcements</a>
+              <a href="admin-dashboard.html" class="admin-only hidden rounded-md px-3 py-2 text-sm font-medium text-teal-300 hover:text-white">Admin Dashboard</a>
+              <a href="event.html" class="rounded-md px-3 py-2 text-sm font-medium text-teal-100 hover:bg-white/10 hover:text-white">Events</a>
+              <a href="announcement.html" class="rounded-md px-3 py-2 text-sm font-medium text-teal-100 hover:bg-white/10 hover:text-white">Announcements</a>
               <a href="promo.html" class="rounded-md bg-teal-800 px-3 py-2 text-sm font-bold text-white">Promos</a>
-              <a href="services.html"
-                class="rounded-md px-3 py-2 text-sm font-medium text-teal-100 hover:bg-white/10 hover:text-white">Services</a>
+              <a href="services.html" class="user-only rounded-md px-3 py-2 text-sm font-medium text-teal-100 hover:bg-white/10 hover:text-white">Services</a>
             </div>
           </div>
         </div>
         <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-          <!-- bell -->
-          <button id="bell" type="button"
-            class="relative rounded-full p-1 text-teal-300 hover:text-white focus:outline-none">
+          <button id="bell" type="button" class="relative rounded-full p-1 text-teal-300 hover:text-white focus:outline-none">
             <span id="unread-badge" class="absolute top-0 right-0 h-2 w-2 bg-red-500 rounded-full hidden"></span>
-            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" class="w-6 h-6">
-              <path stroke-linecap="round" stroke-linejoin="round"
-                d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
-            </svg>
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" /></svg>
           </button>
-          <div id="notif-dropdown"
-            class="hidden absolute right-0 top-12 z-50 mt-2 w-80 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 py-2 overflow-y-auto max-h-96">
-            <div class="px-4 py-2 border-b border-gray-100">
-              <h3 class="text-sm font-bold text-gray-700">Notifications</h3>
-            </div>
-            <div id="notif-list" class="divide-y divide-gray-100 text-sm">
-              <p class="p-4 text-gray-500 text-center">Loading...</p>
-            </div>
+          <div id="notif-dropdown" class="hidden absolute right-0 top-12 z-50 mt-2 w-80 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 py-2 overflow-y-auto max-h-96">
+              <div class="px-4 py-2 border-b border-gray-100"><h3 class="text-sm font-bold text-gray-700">Notifications</h3></div>
+              <div id="notif-list" class="divide-y divide-gray-100 text-sm"><p class="p-4 text-gray-500 text-center">Loading...</p></div>
           </div>
-          <!-- profile -->
           <div class="relative ml-4">
-            <button id="pro-menu"
-              class="flex text-sm rounded-full bg-teal-800 text-white focus:outline-none border border-teal-600 p-1 px-3">
-              Profile <svg class="ml-1 w-4 h-4 translate-y-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-              </svg>
+            <button id="pro-menu" class="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white">
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTre4TseOqU7NynnfZPa9QM2YuHLO9KdVPwrA&s" class="h-8 w-8 rounded-full" />
             </button>
-            <div id="user-dropdown"
-              class="hidden absolute right-0 z-50 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5">
-              <div class="px-4 py-2 border-b border-slate-100">
-                <p id="nav-user-name" class="text-sm font-bold text-slate-800"></p>
-                <p id="nav-user-role" class="text-xs text-slate-500 capitalize"></p>
-              </div>
+            <div id="user-dropdown" class="hidden absolute right-0 z-50 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5">
+              <div class="px-4 py-2 border-b border-slate-100"><p id="nav-user-name" class="text-sm font-bold text-slate-800"></p><p id="nav-user-role" class="text-xs text-slate-500 capitalize"></p></div>
               <a href="profile.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-100">My Profile</a>
-              <a href="registration.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-100">My
-                Registrations</a>
-              <button onclick="auth.logout()"
-                class="w-full text-left block px-4 py-2 text-sm text-red-600 hover:bg-slate-100 font-bold border-t border-slate-100">Logout</button>
+              <a href="registration.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-100">My Registrations</a>
+              <button onclick="auth.logout()" class="w-full text-left block px-4 py-2 text-sm text-red-600 hover:bg-slate-100 font-bold border-t border-slate-100">Logout</button>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <!-- mobile menu -->
     <div id="mobile-menu" class="hidden sm:hidden bg-teal-900 absolute w-full z-40 border-t border-teal-800 shadow-xl">
-      <div class="space-y-1 px-2 pt-2 pb-3">
-        <a href="admin-dashboard.html"
-          class="admin-only hidden block rounded-md px-3 py-2 text-base font-medium text-teal-300">Admin Dashboard</a>
+      <div class="space-y-1 px-2 pt-2 pb-3 shadow-lg">
+        <a href="admin-dashboard.html" class="admin-only hidden block rounded-md px-3 py-2 text-base font-medium text-teal-300">Admin Dashboard</a>
         <a href="event.html" class="text-teal-100 block rounded-md px-3 py-2 text-base font-medium">Events</a>
-        <a href="announcement.html"
-          class="text-teal-100 block rounded-md px-3 py-2 text-base font-medium">Announcements</a>
+        <a href="announcement.html" class="text-teal-100 block rounded-md px-3 py-2 text-base font-medium">Announcements</a>
         <a href="promo.html" class="bg-teal-800 text-white block rounded-md px-3 py-2 text-base font-medium">Promos</a>
-        <a href="services.html" class="text-teal-100 block rounded-md px-3 py-2 text-base font-medium">Services</a>
+        <a href="services.html" class="user-only text-teal-100 block rounded-md px-3 py-2 text-base font-medium">Services</a>
       </div>
     </div>
   </nav>
@@ -109,11 +82,45 @@
           Create Promo</a>
       </div>
 
-      <div id="loading" class="text-center py-20 text-gray-500">
-        <p class="animate-pulse font-medium">Loading promos...</p>
+      <div id="promo-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Video Skeletons -->
+        <div class="skeleton-card bg-white rounded-xl overflow-hidden shadow-sm border border-slate-200 animate-pulse">
+          <div class="bg-slate-800 h-48 flex items-center justify-center">
+            <div class="w-12 h-12 bg-slate-700 rounded-full flex items-center justify-center">
+              <div class="w-0 h-0 border-t-[8px] border-t-transparent border-l-[12px] border-l-slate-600 border-b-[8px] border-b-transparent ml-1"></div>
+            </div>
+          </div>
+          <div class="p-5 space-y-3">
+            <div class="h-6 bg-slate-200 rounded w-3/4"></div>
+            <div class="h-4 bg-slate-200 rounded w-full"></div>
+            <div class="h-10 bg-slate-200 rounded-lg w-full mt-4"></div>
+          </div>
+        </div>
+        <div class="skeleton-card bg-white rounded-xl overflow-hidden shadow-sm border border-slate-200 animate-pulse">
+          <div class="bg-slate-800 h-48 flex items-center justify-center">
+            <div class="w-12 h-12 bg-slate-700 rounded-full flex items-center justify-center">
+              <div class="w-0 h-0 border-t-[8px] border-t-transparent border-l-[12px] border-l-slate-600 border-b-[8px] border-b-transparent ml-1"></div>
+            </div>
+          </div>
+          <div class="p-5 space-y-3">
+            <div class="h-6 bg-slate-200 rounded w-2/3"></div>
+            <div class="h-4 bg-slate-200 rounded w-5/6"></div>
+            <div class="h-10 bg-slate-200 rounded-lg w-full mt-4"></div>
+          </div>
+        </div>
+        <div class="skeleton-card bg-white rounded-xl overflow-hidden shadow-sm border border-slate-200 animate-pulse">
+          <div class="bg-slate-800 h-48 flex items-center justify-center">
+            <div class="w-12 h-12 bg-slate-700 rounded-full flex items-center justify-center">
+              <div class="w-0 h-0 border-t-[8px] border-t-transparent border-l-[12px] border-l-slate-600 border-b-[8px] border-b-transparent ml-1"></div>
+            </div>
+          </div>
+          <div class="p-5 space-y-3">
+            <div class="h-6 bg-slate-200 rounded w-3/4"></div>
+            <div class="h-4 bg-slate-200 rounded w-full"></div>
+            <div class="h-10 bg-slate-200 rounded-lg w-full mt-4"></div>
+          </div>
+        </div>
       </div>
-
-      <div id="promo-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
       <p id="empty-msg" class="hidden text-slate-500 text-center py-20 italic">No promos available right now.</p>
 
     </div>
@@ -221,11 +228,11 @@
             </span>
             +250788873423
           </p>
-          <p class="flex items-center justify-center md:justify-start">
+          <p class="mb-4 flex items-center justify-center md:justify-start">
             <span class="me-3 [&>svg]:h-5 [&>svg]:w-5">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                 <path fill-rule="evenodd"
-                  d="M7.875 1.5C6.839 1.5 6 2.34 6 3.375v2.99c-.426.053-.851.11-1.274.174-1.454.218-2.476 1.483-2.476 2.917v6.294a3 3 0 003 3h.27l-.155 1.705A1.875 1.875 0 007.232 22.5h9.536a1.875 1.875 0 001.867-2.045l-.155-1.705h.27a3 3 0 003-3V9.456c0-1.434-1.022-2.7-2.476-2.917A48.716 48.716 0 0018 6.366V3.375c0-1.036-.84-1.875-1.875-1.875h-8.25zM16.5 6.205v-2.83A.375.375 0 0016.125 3h-8.25a.375.375 0 00-.375.375v2.83a49.353 49.353 0 019 0zm-.217 8.265c.178.018.317.16.333.337l.526 5.784a.375.375 0 01-.374.409H7.232a.375.375 0 01-.374-.409l.526-5.784a.373.373 0 01.333-.337 41.741 41.741 0 018.566 0zm.967-3.97a.75.75 0 01.75-.75h.008a.75.75 0 01.75.75v.008a.75.75 0 01-.75.75H18a.75.75 0 01-.75-.75V10.5zM15 9.75a.75.75 0 00-.75.75v.008c0 .414.336.75.75.75h.008a.75.75 0 00.75-.75V10.5a.75.75 0 00-.75-.75H15z"
+                  d="M1.5 4.5a3 3 0 013-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 01-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 006.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 011.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 01-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 6.75V4.5z"
                   clip-rule="evenodd" />
               </svg>
             </span>
@@ -255,26 +262,25 @@
         $('#nav-user-role').text(me.role);
       }
 
-      $('#mob-menu').click(() => $('#mobile-menu').toggleClass('hidden'));
-      $('#bell').click(e => { e.stopPropagation(); $('#notif-dropdown').toggleClass('hidden'); $('#user-dropdown').addClass('hidden'); loadNotifs(); });
-      $(document).click(() => { $('#notif-dropdown, #user-dropdown').addClass('hidden'); });
-      $('#notif-dropdown, #user-dropdown').click(e => e.stopPropagation());
-
-      function loadNotifs() {
-        Api.call('/api/notifications', 'GET').done(function (list) {
-          const unread = list.filter(n => !n.is_read).length;
-          if (unread > 0) $('#unread-badge').removeClass('hidden');
-          let html = list.length === 0 ? '<p class="p-4 text-gray-500 text-center">No notifications</p>' : '';
-          list.slice(0, 10).forEach(n => {
-            html += `<div class="p-3 hover:bg-slate-50 border-b border-gray-50">
-              <p class="font-bold text-teal-800 text-sm">${n.title}</p>
-              <p class="text-xs text-gray-600 mt-1">${n.message}</p>
-            </div>`;
-          });
-          $('#notif-list').html(html);
-        });
-      }
-      loadNotifs();
+        function loadNotifications() {
+            Api.call('/api/notifications', 'GET').done(function(res){
+                const nots = res.data || [];
+                let unread = nots.filter(n => !n.is_read).length;
+                if(unread > 0) $('#unread-badge').removeClass('hidden'); else $('#unread-badge').addClass('hidden');
+                
+                let html = '';
+                if(nots.length === 0) html = '<p class="p-4 text-gray-500 text-center">No notifications</p>';
+                nots.slice(0, 10).forEach(n => {
+                    html += `<div class="p-3 hover:bg-slate-50 cursor-pointer border-b border-gray-50">
+                        <p class="font-bold text-teal-800 text-sm">${n.title}</p>
+                        <p class="text-xs text-gray-600 mt-1">${n.message}</p>
+                    </div>`;
+                });
+                $('#notif-list').html(html);
+            });
+        }
+        window.loadNotifications = loadNotifications;
+        loadNotifications(); // initial check (badge only)
 
       function showToast(msg, isErr) {
         $('#toast-box').removeClass('bg-teal-600 bg-red-600').addClass(isErr ? 'bg-red-600' : 'bg-teal-600');
@@ -283,60 +289,73 @@
         setTimeout(() => $('#toast').addClass('translate-y-20 opacity-0'), 3000);
       }
 
-      // load promos from API
-      Api.call('/api/promos', 'GET').done(function (res) {
-        $('#loading').addClass('hidden');
-        let promos = Array.isArray(res) ? res : (res.data || []);
+      function loadPromos() {
+        $('#empty-msg').addClass('hidden');
+        const skeletonCard = `
+        <div class="skeleton-card bg-white rounded-xl overflow-hidden shadow-sm border border-slate-200 animate-pulse h-80">
+          <div class="h-48 bg-slate-200"></div>
+          <div class="p-5 space-y-3">
+            <div class="h-6 bg-slate-200 rounded w-3/4"></div>
+            <div class="h-4 bg-slate-200 rounded w-1/2"></div>
+            <div class="h-10 bg-slate-200 rounded-lg w-full mt-4"></div>
+          </div>
+        </div>`;
+        $('#promo-grid').html(skeletonCard.repeat(6));
 
-        if (promos.length === 0) { $('#empty-msg').removeClass('hidden'); return; }
+        const delay = new Promise(resolve => setTimeout(resolve, 800));
+        const request = Api.call('/api/promos', 'GET');
 
-        promos.forEach(function (p) {
-          // only show published to normal users
-          if (p.published === false && me.role !== 'admin') return;
+        Promise.all([request, delay]).then(([res]) => {
+            $('#promo-grid .skeleton-card').remove();
+            let promos = res.data || [];
 
-          const file = p.video_url;
-          let videoUrl = file;
-          if (file && !file.startsWith('http')) {
-            videoUrl = file.includes('/uploads/') ? `http://localhost:4000${file}` : `http://localhost:4000/uploads/promos/${file}`;
-          }
+            if (promos.length === 0) { $('#empty-msg').removeClass('hidden'); return; }
 
-          // admin controls
-          const adminBtns = me.role === 'admin' ? `
-            <div class="flex gap-2 mt-3 pt-3 border-t border-slate-100">
-              <a href="admin-promo.html?id=${p.id}" class="flex-1 text-center bg-amber-100 hover:bg-amber-200 text-amber-800 py-1.5 rounded text-sm font-medium">Edit</a>
-              <button onclick="deletePromo('${p.id}', this)" class="flex-1 bg-red-50 hover:bg-red-100 text-red-600 py-1.5 rounded text-sm font-medium">Delete</button>
-            </div>` : '';
+            promos.forEach(function (p) {
+              if (p.published === false && me.role !== 'admin') return;
 
-          const draftBadge = p.published === false ? '<span class="px-2 py-1 bg-gray-200 text-gray-600 text-xs rounded-full">Draft</span>' : '';
+              const videoUrl = p.video_url || '';
 
-          const card = `
-          <div class="bg-white rounded-xl overflow-hidden shadow-sm border border-slate-200 hover:shadow-md transition flex flex-col">
-            <div class="relative bg-slate-900 h-48 flex items-center justify-center cursor-pointer group" onclick="openVideo('${videoUrl}', '${p.title.replace(/'/g, "\\'")}', '${(p.description || '').replace(/'/g, "\\'")}', '${p.caption_text || ''}')">
-              <svg class="w-16 h-16 text-white opacity-80 group-hover:opacity-100 transition" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M8 5v14l11-7z"/>
-              </svg>
-              <span class="absolute bottom-2 left-2 bg-black/50 text-white text-xs px-2 py-1 rounded">Click to play</span>
-            </div>
-            <div class="p-5 flex flex-col flex-grow">
-              <div class="flex justify-between items-start mb-2 gap-2">
-                <h3 class="font-bold text-teal-950 text-lg leading-tight">${p.title}</h3>
-                ${draftBadge}
-              </div>
-              <p class="text-sm text-slate-600 line-clamp-2 flex-grow">${p.description || ''}</p>
-              <button onclick="openVideo('${videoUrl}', '${p.title.replace(/'/g, "\\'")}', '${(p.description || '').replace(/'/g, "\\'")}', '${p.caption_text || ''}')" class="mt-4 w-full bg-teal-700 hover:bg-teal-800 text-white py-2 rounded-lg text-sm font-bold transition">
-                ▶ Watch Promo
-              </button>
-              ${adminBtns}
-            </div>
-          </div>`;
-          $('#promo-grid').append(card);
+              const adminBtns = me.role === 'admin' ? `
+                <div class="flex gap-2 mt-3 pt-3 border-t border-slate-100">
+                  <a href="admin-promo.html?id=${p.id}" class="flex-1 text-center bg-amber-100 hover:bg-amber-200 text-amber-800 py-1.5 rounded text-sm font-medium">Edit</a>
+                  <button onclick="deletePromo('${p.id}', this)" class="flex-1 bg-red-50 hover:bg-red-100 text-red-600 py-1.5 rounded text-sm font-medium">Delete</button>
+                </div>` : '';
+
+              const draftBadge = p.published === false ? '<span class="px-2 py-1 bg-gray-200 text-gray-600 text-xs rounded-full">Draft</span>' : '';
+
+              const card = `
+              <div class="bg-white rounded-xl overflow-hidden shadow-sm border border-slate-200 hover:shadow-md transition flex flex-col">
+                <div class="relative bg-slate-900 h-48 flex items-center justify-center cursor-pointer group" onclick="openVideo('${videoUrl}', '${p.title.replace(/'/g, "\\'")}', '${(p.description || '').replace(/'/g, "\\'")}', '${p.caption_text || ''}')">
+                  <svg class="w-16 h-16 text-white opacity-80 group-hover:opacity-100 transition" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                  <span class="absolute bottom-2 left-2 bg-black/50 text-white text-xs px-2 py-1 rounded">Click to play</span>
+                </div>
+                <div class="p-5 flex flex-col flex-grow">
+                  <div class="flex justify-between items-start mb-2 gap-2">
+                    <h3 class="font-bold text-teal-950 text-lg leading-tight line-clamp-2">${p.title}</h3>
+                    ${draftBadge}
+                  </div>
+                  <p class="text-sm text-slate-600 line-clamp-2 flex-grow">${p.description || ''}</p>
+                  <button onclick="openVideo('${videoUrl}', '${p.title.replace(/'/g, "\\'")}', '${(p.description || '').replace(/'/g, "\\'")}', '${p.caption_text || ''}')" class="mt-4 w-full bg-teal-700 hover:bg-teal-800 text-white py-2 rounded-lg text-sm font-bold transition">
+                    ▶ Watch Promo
+                  </button>
+                  ${adminBtns}
+                </div>
+              </div>`;
+              $('#promo-grid').append(card);
+            });
+
+            if ($('#promo-grid').children().length === 0) $('#empty-msg').removeClass('hidden');
+        }).catch(() => {
+            delay.then(() => {
+                $('#promo-grid .skeleton-card').remove();
+                $('#promo-grid').html('<div class="col-span-full"><p class="text-red-500 bg-red-50 border border-red-200 rounded-lg p-4 inline-block">Failed to load promos. Please try again.</p></div>');
+            });
         });
-
-        if ($('#promo-grid').children().length === 0) $('#empty-msg').removeClass('hidden');
-
-      }).fail(function () {
-        $('#loading').html('<p class="text-red-500 bg-red-50 p-4 rounded inline-block">Failed to load promos.</p>');
-      });
+      }
+      loadPromos();
 
       // open video modal
       window.openVideo = function (url, title, desc, captions) {
