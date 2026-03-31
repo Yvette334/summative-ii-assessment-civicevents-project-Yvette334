@@ -1,55 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Profile - CivicEvents+</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
+
 <body class="bg-slate-50 flex flex-col min-h-screen text-slate-800 font-sans">
 
   <nav class="relative bg-teal-950 border-b border-teal-800 shadow-md">
     <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
       <div class="relative flex h-16 items-center justify-between">
         <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
-          <button id="mob-menu" type="button" class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-white/5 hover:text-white">
+          <button id="mob-menu" type="button"
+            class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-white/5 hover:text-white">
             <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
             </svg>
           </button>
         </div>
         <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
           <div class="flex shrink-0 items-center">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXdFae6GWB-DBtiL0kLto2aIUnR5G_c5bp_g&s" alt="Logo" class="h-8 w-auto rounded"/>
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXdFae6GWB-DBtiL0kLto2aIUnR5G_c5bp_g&s"
+              alt="Logo" class="h-8 w-auto rounded" />
           </div>
           <div class="hidden sm:ml-6 sm:block">
             <div class="flex space-x-4">
-              <a href="admin-dashboard.html" class="admin-only hidden rounded-md px-3 py-2 text-sm font-medium text-teal-300 hover:text-white">Admin Dashboard</a>
-              <a href="event.html" class="rounded-md px-3 py-2 text-sm font-medium text-teal-100 hover:bg-white/10 hover:text-white">Events</a>
-              <a href="announcement.html" class="rounded-md px-3 py-2 text-sm font-medium text-teal-100 hover:bg-white/10 hover:text-white">Announcements</a>
-              <a href="promo.html" class="rounded-md px-3 py-2 text-sm font-medium text-teal-100 hover:bg-white/10 hover:text-white">Promos</a>
-              <a href="services.html" class="user-only rounded-md px-3 py-2 text-sm font-medium text-teal-100 hover:bg-white/10 hover:text-white">Services</a>
+              <a href="admin-dashboard.html"
+                class="admin-only hidden rounded-md px-3 py-2 text-sm font-medium text-teal-300 hover:text-white">Admin
+                Dashboard</a>
+              <a href="event.html"
+                class="rounded-md px-3 py-2 text-sm font-medium text-teal-100 hover:bg-white/10 hover:text-white">Events</a>
+              <a href="announcement.html"
+                class="rounded-md px-3 py-2 text-sm font-medium text-teal-100 hover:bg-white/10 hover:text-white">Announcements</a>
+              <a href="promo.html"
+                class="rounded-md px-3 py-2 text-sm font-medium text-teal-100 hover:bg-white/10 hover:text-white">Promos</a>
+              <a href="services.html"
+                class="user-only rounded-md px-3 py-2 text-sm font-medium text-teal-100 hover:bg-white/10 hover:text-white">Services</a>
             </div>
           </div>
         </div>
         <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-          <button id="bell" type="button" class="relative rounded-full p-1 text-teal-300 hover:text-white focus:outline-none">
+          <button id="bell" type="button"
+            class="relative rounded-full p-1 text-teal-300 hover:text-white focus:outline-none">
             <span id="unread-badge" class="absolute top-0 right-0 h-2 w-2 bg-red-500 rounded-full hidden"></span>
-            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" /></svg>
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
+            </svg>
           </button>
-          <div id="notif-dropdown" class="hidden absolute right-0 top-12 z-50 mt-2 w-80 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 py-2 overflow-y-auto max-h-96">
-              <div class="px-4 py-2 border-b border-gray-100"><h3 class="text-sm font-bold text-gray-700">Notifications</h3></div>
-              <div id="notif-list" class="divide-y divide-gray-100 text-sm"><p class="p-4 text-gray-500 text-center">Loading...</p></div>
+          <div id="notif-dropdown"
+            class="hidden absolute right-0 top-12 z-50 mt-2 w-80 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 py-2 overflow-y-auto max-h-96">
+            <div class="px-4 py-2 border-b border-gray-100">
+              <h3 class="text-sm font-bold text-gray-700">Notifications</h3>
+            </div>
+            <div id="notif-list" class="divide-y divide-gray-100 text-sm">
+              <p class="p-4 text-gray-500 text-center">Loading...</p>
+            </div>
           </div>
           <div class="relative ml-4">
-            <button id="pro-menu" class="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white">
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTre4TseOqU7NynnfZPa9QM2YuHLO9KdVPwrA&s" class="h-8 w-8 rounded-full" />
+            <button id="pro-menu"
+              class="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white">
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTre4TseOqU7NynnfZPa9QM2YuHLO9KdVPwrA&s"
+                class="h-8 w-8 rounded-full" />
             </button>
-            <div id="user-dropdown" class="hidden absolute right-0 z-50 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5">
-              <div class="px-4 py-2 border-b border-slate-100"><p id="nav-user-name" class="text-sm font-bold text-slate-800"></p><p id="nav-user-role" class="text-xs text-slate-500 capitalize"></p></div>
+            <div id="user-dropdown"
+              class="hidden absolute right-0 z-50 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5">
+              <div class="px-4 py-2 border-b border-slate-100">
+                <p id="nav-user-name" class="text-sm font-bold text-slate-800"></p>
+                <p id="nav-user-role" class="text-xs text-slate-500 capitalize"></p>
+              </div>
               <a href="profile.html" class="block px-4 py-2 text-sm text-teal-700 font-bold bg-slate-50">My Profile</a>
-              <a href="registration.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-100">My Registrations</a>
-              <button onclick="auth.logout()" class="w-full text-left block px-4 py-2 text-sm text-red-600 hover:bg-slate-100 font-bold border-t border-slate-100">Logout</button>
+              <a href="registration.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-100">My
+                Registrations</a>
+              <button onclick="auth.logout()"
+                class="w-full text-left block px-4 py-2 text-sm text-red-600 hover:bg-slate-100 font-bold border-t border-slate-100">Logout</button>
             </div>
           </div>
         </div>
@@ -57,11 +84,14 @@
     </div>
     <div id="mobile-menu" class="hidden sm:hidden bg-teal-900 absolute w-full z-40 border-t border-teal-800 shadow-xl">
       <div class="space-y-1 px-2 pt-2 pb-3 shadow-lg">
-        <a href="admin-dashboard.html" class="admin-only hidden block rounded-md px-3 py-2 text-base font-medium text-teal-300">Admin Dashboard</a>
+        <a href="admin-dashboard.html"
+          class="admin-only hidden block rounded-md px-3 py-2 text-base font-medium text-teal-300">Admin Dashboard</a>
         <a href="event.html" class="text-teal-100 block rounded-md px-3 py-2 text-base font-medium">Events</a>
-        <a href="announcement.html" class="text-teal-100 block rounded-md px-3 py-2 text-base font-medium">Announcements</a>
+        <a href="announcement.html"
+          class="text-teal-100 block rounded-md px-3 py-2 text-base font-medium">Announcements</a>
         <a href="promo.html" class="text-teal-100 block rounded-md px-3 py-2 text-base font-medium">Promos</a>
-        <a href="services.html" class="user-only text-teal-100 block rounded-md px-3 py-2 text-base font-medium">Services</a>
+        <a href="services.html"
+          class="user-only text-teal-100 block rounded-md px-3 py-2 text-base font-medium">Services</a>
       </div>
     </div>
   </nav>
@@ -75,11 +105,14 @@
         <div class="lg:col-span-1">
           <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 sticky top-8">
             <div class="flex flex-col items-center text-center mb-6">
-              <div id="avatar" class="h-24 w-24 rounded-full bg-teal-700 text-white flex items-center justify-center text-4xl font-bold mb-4 shadow-inner">?</div>
+              <div id="avatar"
+                class="h-24 w-24 rounded-full bg-teal-700 text-white flex items-center justify-center text-4xl font-bold mb-4 shadow-inner">
+                ?</div>
               <p id="info-name" class="text-xl font-bold text-teal-950">Loading...</p>
               <p id="info-email" class="text-sm text-slate-500 mb-2"></p>
               <div class="flex gap-2 justify-center">
-                <span id="info-role" class="px-2 py-0.5 bg-teal-100 text-teal-700 text-[10px] font-bold rounded-full capitalize"></span>
+                <span id="info-role"
+                  class="px-2 py-0.5 bg-teal-100 text-teal-700 text-[10px] font-bold rounded-full capitalize"></span>
                 <span id="info-status" class="px-2 py-0.5 text-[10px] font-bold rounded-full"></span>
               </div>
             </div>
@@ -88,13 +121,16 @@
               <h2 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-2">Account Details</h2>
               <div>
                 <label for="edit-name" class="block text-xs font-bold text-slate-700 mb-1">Full Name</label>
-                <input type="text" id="edit-name" required class="w-full rounded-md border border-slate-300 px-3 py-2 text-sm outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500">
+                <input type="text" id="edit-name" required
+                  class="w-full rounded-md border border-slate-300 px-3 py-2 text-sm outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500">
               </div>
               <div>
                 <label for="edit-email" class="block text-xs font-bold text-slate-700 mb-1">Email</label>
-                <input type="email" id="edit-email" required class="w-full rounded-md border border-slate-300 px-3 py-2 text-sm outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500">
+                <input type="email" id="edit-email" required
+                  class="w-full rounded-md border border-slate-300 px-3 py-2 text-sm outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500">
               </div>
-              <button type="submit" id="update-btn" class="w-full bg-teal-700 hover:bg-teal-800 text-white px-4 py-2 rounded-lg font-bold text-sm transition shadow-sm">
+              <button type="submit" id="update-btn"
+                class="w-full bg-teal-700 hover:bg-teal-800 text-white px-4 py-2 rounded-lg font-bold text-sm transition shadow-sm">
                 Update Profile
               </button>
             </form>
@@ -105,21 +141,25 @@
         <div class="lg:col-span-2">
           <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 h-full min-h-[400px]">
             <h2 class="text-xl font-bold text-teal-950 mb-6 flex items-center gap-2">
-                <svg class="w-6 h-6 text-teal-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
-                My Registrations
+              <svg class="w-6 h-6 text-teal-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2">
+                </path>
+              </svg>
+              My Registrations
             </h2>
-            
+
             <div id="reg-list" class="space-y-4">
-                <!-- Skeleton Loader -->
-                <div class="reg-skeleton space-y-4">
-                    <div class="h-24 bg-slate-100 rounded-xl animate-pulse"></div>
-                    <div class="h-24 bg-slate-100 rounded-xl animate-pulse"></div>
-                    <div class="h-24 bg-slate-100 rounded-xl animate-pulse opacity-60"></div>
-                </div>
+              <!-- Skeleton Loader -->
+              <div class="reg-skeleton space-y-4">
+                <div class="h-24 bg-slate-100 rounded-xl animate-pulse"></div>
+                <div class="h-24 bg-slate-100 rounded-xl animate-pulse"></div>
+                <div class="h-24 bg-slate-100 rounded-xl animate-pulse opacity-60"></div>
+              </div>
             </div>
             <div id="empty-regs" class="hidden py-20 text-center">
-                <p class="text-slate-400 italic">You haven't registered for any events yet.</p>
-                <a href="event.html" class="mt-4 inline-block text-teal-700 font-bold hover:underline">Browse Events →</a>
+              <p class="text-slate-400 italic">You haven't registered for any events yet.</p>
+              <a href="event.html" class="mt-4 inline-block text-teal-700 font-bold hover:underline">Browse Events →</a>
             </div>
           </div>
         </div>
@@ -134,12 +174,14 @@
           <h6 class="mb-4 flex items-center justify-center font-semibold uppercase md:justify-start">
             <span class="me-3 [&>svg]:h-4 [&>svg]:w-4">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12.378 1.602a.75.75 0 00-.756 0L3 6.632l9 5.25 9-5.25-8.622-5.03zM21.75 7.93l-9 5.25v9l8.628-5.032a.75.75 0 00.372-.648V7.93zM11.25 22.18v-9l-9-5.25v8.57a.75.75 0 00.372.648l8.628 5.033z" />
+                <path
+                  d="M12.378 1.602a.75.75 0 00-.756 0L3 6.632l9 5.25 9-5.25-8.622-5.03zM21.75 7.93l-9 5.25v9l8.628-5.032a.75.75 0 00.372-.648V7.93zM11.25 22.18v-9l-9-5.25v8.57a.75.75 0 00.372.648l8.628 5.033z" />
               </svg>
             </span>
             CivicEvents
           </h6>
-          <p>Your accessible portal for city events and community services. Stay connected with what's happening in your city.</p>
+          <p>Your accessible portal for city events and community services. Stay connected with what's happening in your
+            city.</p>
         </div>
         <div>
           <h6 class="mb-4 flex justify-center font-semibold uppercase md:justify-start">Website Links</h6>
@@ -152,28 +194,31 @@
           <h6 class="mb-4 flex justify-center font-semibold uppercase md:justify-start">Contact & Help</h6>
           <p class="mb-4 flex items-center justify-center md:justify-start">
             <span class="me-3 [&>svg]:h-5 [&>svg]:w-5">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M11.47 3.84a.75.75 0 011.06 0l8.69 8.69a.75.75 0 101.06-1.06l-8.689-8.69a2.25 2.25 0 00-3.182 0l-8.69 8.69a.75.75 0 001.061 1.06l8.69-8.69z" /><path d="M12 5.432l8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 01-.75-.75v-4.5a.75.75 0 00-.75-.75h-3a.75.75 0 00-.75.75V21a.75.75 0 01-.75.75H5.625a1.875 1.875 0 01-1.875-1.875v-6.198a2.29 2.29 0 00.091-.086L12 5.43z" /></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M11.47 3.84a.75.75 0 011.06 0l8.69 8.69a.75.75 0 101.06-1.06l-8.689-8.69a2.25 2.25 0 00-3.182 0l-8.69 8.69a.75.75 0 001.061 1.06l8.69-8.69z" />
+                <path
+                  d="M12 5.432l8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 01-.75-.75v-4.5a.75.75 0 00-.75-.75h-3a.75.75 0 00-.75.75V21a.75.75 0 01-.75.75H5.625a1.875 1.875 0 01-1.875-1.875v-6.198a2.29 2.29 0 00.091-.086L12 5.43z" />
+              </svg>
             </span>
             Rwanda, Kigali
           </p>
           <p class="mb-4 flex items-center justify-center md:justify-start">
             <span class="me-3 [&>svg]:h-5 [&>svg]:w-5">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M1.5 8.67v8.58a3 3 0 003 3h15a3 3 0 003-3V8.67l-8.928 5.493a3 3 0 01-3.144 0L1.5 8.67z" /><path d="M22.5 6.908V6.75a3 3 0 00-3-3h-15a3 3 0 00-3 3v.158l9.714 5.978a1.5 1.5 0 001.572 0L22.5 6.908z" /></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M1.5 8.67v8.58a3 3 0 003 3h15a3 3 0 003-3V8.67l-8.928 5.493a3 3 0 01-3.144 0L1.5 8.67z" />
+                <path
+                  d="M22.5 6.908V6.75a3 3 0 00-3-3h-15a3 3 0 00-3 3v.158l9.714 5.978a1.5 1.5 0 001.572 0L22.5 6.908z" />
+              </svg>
             </span>
             civievent@gmail.com
           </p>
           <p class="mb-4 flex items-center justify-center md:justify-start">
             <span class="me-3 [&>svg]:h-5 [&>svg]:w-5">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                <path fill-rule="evenodd" d="M1.5 4.5a3 3 0 013-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 01-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 006.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 011.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 01-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 6.75V4.5z" clip-rule="evenodd" />
-              </svg>
-            </span>
-            +250788873423
-          </p>
-          <p class="mb-4 flex items-center justify-center md:justify-start">
-            <span class="me-3 [&>svg]:h-5 [&>svg]:w-5">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                <path fill-rule="evenodd" d="M1.5 4.5a3 3 0 013-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 01-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 006.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 011.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 01-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 6.75V4.5z" clip-rule="evenodd" />
+                <path fill-rule="evenodd"
+                  d="M1.5 4.5a3 3 0 013-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 01-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 006.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 011.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 01-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 6.75V4.5z"
+                  clip-rule="evenodd" />
               </svg>
             </span>
             +250788873423
@@ -185,7 +230,6 @@
       <span>© 2026 Copyright.CivicEvents</span>
     </div>
   </footer>
-
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script src="js/api.js"></script>
   <script src="js/auth.js"></script>
@@ -209,28 +253,28 @@
 
       // Load User Info
       function loadProfile() {
-          Api.call('/api/users/profile/me', 'GET').done(res => {
-            const user = res.data || res;
-            $('#info-name').text(user.full_name);
-            $('#info-email').text(user.email);
-            $('#info-role').text(user.role);
-            $('#avatar').text((user.full_name || '?').charAt(0).toUpperCase());
-            $('#info-status').text(user.is_active ? 'Active' : 'Disabled')
-                .addClass(user.is_active ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-600');
-            
-            $('#edit-name').val(user.full_name);
-            $('#edit-email').val(user.email);
-          }).fail(() => {
-            if (me) {
-                $('#info-name').text(me.full_name);
-                $('#info-email').text(me.email);
-                $('#info-role').text(me.role);
-                $('#avatar').text((me.full_name || '?').charAt(0).toUpperCase());
-                $('#info-status').text('Active').addClass('bg-green-100 text-green-700');
-                $('#edit-name').val(me.full_name);
-                $('#edit-email').val(me.email);
-            }
-          });
+        Api.call('/api/users/profile/me', 'GET').done(res => {
+          const user = res.data || res;
+          $('#info-name').text(user.full_name);
+          $('#info-email').text(user.email);
+          $('#info-role').text(user.role);
+          $('#avatar').text((user.full_name || '?').charAt(0).toUpperCase());
+          $('#info-status').text(user.is_active ? 'Active' : 'Disabled')
+            .addClass(user.is_active ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-600');
+
+          $('#edit-name').val(user.full_name);
+          $('#edit-email').val(user.email);
+        }).fail(() => {
+          if (me) {
+            $('#info-name').text(me.full_name);
+            $('#info-email').text(me.email);
+            $('#info-role').text(me.role);
+            $('#avatar').text((me.full_name || '?').charAt(0).toUpperCase());
+            $('#info-status').text('Active').addClass('bg-green-100 text-green-700');
+            $('#edit-name').val(me.full_name);
+            $('#edit-email').val(me.email);
+          }
+        });
       }
       loadProfile();
 
@@ -240,17 +284,17 @@
         const request = Api.call('/api/event-registrations/my-registrations', 'GET');
 
         Promise.all([request, delay]).then(([res]) => {
-            const regs = res.data || [];
-            $('#reg-list').empty();
-            if(!regs || regs.length === 0) {
-                $('#empty-regs').removeClass('hidden');
-                return;
-            }
-            
-            regs.forEach(reg => {
-                const ev = reg.event || reg;
-                const d = new Date(ev.starts_at || ev.date || Date.now()).toLocaleDateString();
-                const card = `
+          const regs = res.data || [];
+          $('#reg-list').empty();
+          if (!regs || regs.length === 0) {
+            $('#empty-regs').removeClass('hidden');
+            return;
+          }
+
+          regs.forEach(reg => {
+            const ev = reg.event || reg;
+            const d = new Date(ev.starts_at || ev.date || Date.now()).toLocaleDateString();
+            const card = `
                 <div id="reg-${reg.id}" class="bg-slate-50 border border-slate-200 p-4 rounded-xl flex items-center justify-between hover:bg-white hover:shadow-sm transition-all group">
                     <div class="flex-grow">
                         <h3 class="font-bold text-slate-800 text-lg group-hover:text-teal-800 transition-colors">${ev.title}</h3>
@@ -258,28 +302,27 @@
                     </div>
                     <div class="flex items-center gap-3">
                         <button onclick="cancelRegistration(${reg.id})" class="text-xs font-bold text-red-500 hover:text-red-700 underline px-2 py-1">Cancel</button>
-                        <a href="event-detail.html?id=${ev.id}" class="bg-white border border-slate-200 text-slate-700 px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-slate-50 transition-colors">Details</a>
                     </div>
                 </div>`;
-                $('#reg-list').append(card);
-            });
+            $('#reg-list').append(card);
+          });
         }).catch(() => {
-            delay.then(() => {
-                $('#reg-list').html('<p class="text-red-500 text-sm bg-red-50 p-4 rounded-lg">Failed to load registrations.</p>');
-            });
+          delay.then(() => {
+            $('#reg-list').html('<p class="text-red-500 text-sm bg-red-50 p-4 rounded-lg">Failed to load registrations.</p>');
+          });
         });
       }
       loadRegistrations();
 
-      window.cancelRegistration = function(id) {
-          if (!confirm("Confirm cancellation of your event registration?")) return;
-          Api.call('/api/event-registrations/' + id, 'DELETE').done(() => {
-              $(`#reg-${id}`).fadeOut(300, function() { 
-                  $(this).remove();
-                  if ($('#reg-list').children().length === 0) $('#empty-regs').removeClass('hidden');
-              });
-              showToast('Registration cancelled');
-          }).fail(() => showToast('Cancellation failed', true));
+      window.cancelRegistration = function (id) {
+        if (!confirm("Confirm cancellation of your event registration?")) return;
+        Api.call('/api/event-registrations/' + id, 'DELETE').done(() => {
+          $(`#reg-${id}`).fadeOut(300, function () {
+            $(this).remove();
+            if ($('#reg-list').children().length === 0) $('#empty-regs').removeClass('hidden');
+          });
+          showToast('Registration cancelled');
+        }).fail(() => showToast('Cancellation failed', true));
       }
 
       // Update Profile Logic
@@ -290,25 +333,25 @@
         btn.prop('disabled', true).text('Updating...');
 
         Api.call('/api/users/profile/me', 'PATCH', data).done(() => {
-            showToast('Profile updated successfully!');
-            const stored = auth.getUser();
-            if (stored) {
-              stored.full_name = data.full_name;
-              stored.email = data.email;
-              const storage = sessionStorage.getItem('token') ? sessionStorage : localStorage;
-              storage.setItem('user', JSON.stringify(stored));
-              $('#info-name').text(data.full_name);
-              $('#nav-user-name').text(data.full_name);
-              $('#avatar').text(data.full_name.charAt(0).toUpperCase());
-            }
+          showToast('Profile updated successfully!');
+          const stored = auth.getUser();
+          if (stored) {
+            stored.full_name = data.full_name;
+            stored.email = data.email;
+            const storage = sessionStorage.getItem('token') ? sessionStorage : localStorage;
+            storage.setItem('user', JSON.stringify(stored));
+            $('#info-name').text(data.full_name);
+            $('#nav-user-name').text(data.full_name);
+            $('#avatar').text(data.full_name.charAt(0).toUpperCase());
+          }
         }).fail(err => {
-            const status = err.status;
-            const msg = status === 409
-                ? 'That email is already in use by another account.'
-                : (err.responseJSON?.message || 'Update failed');
-            showToast(msg, true);
+          const status = err.status;
+          const msg = status === 409
+            ? 'That email is already in use by another account.'
+            : (err.responseJSON?.message || 'Update failed');
+          showToast(msg, true);
         }).always(() => {
-            btn.prop('disabled', false).text('Update Profile');
+          btn.prop('disabled', false).text('Update Profile');
         });
       });
 
@@ -320,4 +363,5 @@
   </script>
 
 </body>
+
 </html>
