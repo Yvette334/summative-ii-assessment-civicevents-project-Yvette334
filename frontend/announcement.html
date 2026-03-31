@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Announcements - CivicEvents+</title>
+  <title>Announcements</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
@@ -197,9 +197,25 @@
             $('#nav-user-role').text(currentUser.role);
         }
 
-        function loadNotifications() { Api.loadNotifications(); }
+        function loadNotifications() {
+            Api.call('/api/notifications', 'GET').done(function(res){
+                const nots = res.data || [];
+                let unread = nots.filter(n => !n.is_read).length;
+                if(unread > 0) $('#unread-badge').removeClass('hidden'); else $('#unread-badge').addClass('hidden');
+                
+                let html = '';
+                if(nots.length === 0) html = '<p class="p-4 text-gray-500 text-center">No notifications</p>';
+                nots.slice(0, 10).forEach(n => {
+                    html += `<div class="p-3 hover:bg-slate-50 cursor-pointer border-b border-gray-50">
+                        <p class="font-bold text-teal-800 text-sm">${n.title}</p>
+                        <p class="text-xs text-gray-600 mt-1">${n.message}</p>
+                    </div>`;
+                });
+                $('#notif-list').html(html);
+            });
+        }
         window.loadNotifications = loadNotifications;
-        loadNotifications();
+        loadNotifications(); // initial check (badge only)
 
         // Load Announcements
         function loadAnnouncements() {
@@ -256,7 +272,7 @@
                                 Your browser does not support the audio element.
                             </audio>
                         </div>
-                        <a href="announcement-detail.html?id=${item.id}" class="mt-3 block text-center text-sm text-teal-700 font-bold hover:underline">View Detail →</a>
+                        
                         ${adminHtml}
                     </div>
                     `;
@@ -284,7 +300,7 @@
             Api.call('/api/announcements/' + id, 'DELETE').done(function(){
                 card.fadeOut(300, function() { $(this).remove(); });
             }).fail(function(err){
-                showGlobalToast(err.responseJSON?.message || 'Failed to delete announcement.', true);
+                alert(err.responseJSON?.message || 'Failed to delete announcement.');
                 $(btn).prop('disabled', false).text('Delete');
             });
         };

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Create Promo - CivicEvents+</title>
+  <title>Admin Promo</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-slate-50 flex flex-col min-h-screen text-slate-800 font-sans">
@@ -237,7 +237,21 @@
         $('#nav-user-role').text(me.role);
       }
 
-      function loadNotifications() { Api.loadNotifications(); }
+      function loadNotifications() {
+          Api.call('/api/notifications', 'GET').done(function(res){
+              const nots = res.data || [];
+              let unread = nots.filter(n => !n.is_read).length;
+              if(unread > 0) $('#unread-badge').removeClass('hidden'); else $('#unread-badge').addClass('hidden');
+              let html = nots.length === 0 ? '<p class="p-4 text-gray-500 text-center">No notifications</p>' : '';
+              nots.slice(0, 10).forEach(n => {
+                  html += `<div class="p-3 hover:bg-slate-50 cursor-pointer border-b border-gray-50">
+                      <p class="font-bold text-teal-800 text-sm">${n.title}</p>
+                      <p class="text-xs text-gray-600 mt-1">${n.message}</p>
+                  </div>`;
+              });
+              $('#notif-list').html(html);
+          });
+      }
       window.loadNotifications = loadNotifications;
       loadNotifications();
 
