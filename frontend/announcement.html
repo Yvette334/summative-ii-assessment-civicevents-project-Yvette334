@@ -197,25 +197,9 @@
             $('#nav-user-role').text(currentUser.role);
         }
 
-        function loadNotifications() {
-            Api.call('/api/notifications', 'GET').done(function(res){
-                const nots = res.data || [];
-                let unread = nots.filter(n => !n.is_read).length;
-                if(unread > 0) $('#unread-badge').removeClass('hidden'); else $('#unread-badge').addClass('hidden');
-                
-                let html = '';
-                if(nots.length === 0) html = '<p class="p-4 text-gray-500 text-center">No notifications</p>';
-                nots.slice(0, 10).forEach(n => {
-                    html += `<div class="p-3 hover:bg-slate-50 cursor-pointer border-b border-gray-50">
-                        <p class="font-bold text-teal-800 text-sm">${n.title}</p>
-                        <p class="text-xs text-gray-600 mt-1">${n.message}</p>
-                    </div>`;
-                });
-                $('#notif-list').html(html);
-            });
-        }
+        function loadNotifications() { Api.loadNotifications(); }
         window.loadNotifications = loadNotifications;
-        loadNotifications(); // initial check (badge only)
+        loadNotifications();
 
         // Load Announcements
         function loadAnnouncements() {
@@ -247,6 +231,7 @@
 
                     const adminHtml = currentUser.role === 'admin' ? `
                         <div class="mt-4 flex gap-2 w-full pt-3 border-t border-slate-100">
+                            <a href="admin-announcement.html?id=${item.id}" class="flex-1 text-center bg-amber-100 hover:bg-amber-200 text-amber-800 py-1.5 rounded text-sm font-medium">Edit</a>
                             <button onclick="deleteAnnounce(${item.id}, this)" class="flex-1 bg-red-50 text-red-600 py-1.5 rounded text-sm hover:bg-red-100 font-medium">Delete</button>
                         </div>
                     ` : '';
@@ -271,7 +256,7 @@
                                 Your browser does not support the audio element.
                             </audio>
                         </div>
-                        
+                        <a href="announcement-detail.html?id=${item.id}" class="mt-3 block text-center text-sm text-teal-700 font-bold hover:underline">View Detail →</a>
                         ${adminHtml}
                     </div>
                     `;
@@ -299,7 +284,7 @@
             Api.call('/api/announcements/' + id, 'DELETE').done(function(){
                 card.fadeOut(300, function() { $(this).remove(); });
             }).fail(function(err){
-                alert(err.responseJSON?.message || 'Failed to delete announcement.');
+                showGlobalToast(err.responseJSON?.message || 'Failed to delete announcement.', true);
                 $(btn).prop('disabled', false).text('Delete');
             });
         };

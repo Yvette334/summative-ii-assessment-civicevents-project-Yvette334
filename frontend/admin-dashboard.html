@@ -113,6 +113,24 @@
           <span class="text-teal-100 uppercase tracking-widest text-xs font-bold">Total Registrations</span>
           <h2 id="regs" class="text-5xl font-black mt-2">0</h2>
         </div>
+        <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
+          <span class="text-slate-400 uppercase tracking-widest text-xs font-bold">Total Promos</span>
+          <h2 id="promos" class="text-5xl font-black mt-2 text-teal-950">0</h2>
+        </div>
+        <div class="bg-teal-800 p-8 text-white rounded-2xl shadow-lg">
+          <span class="text-teal-100 uppercase tracking-widest text-xs font-bold">Unread Notifications</span>
+          <h2 id="unread-notifs" class="text-5xl font-black mt-2">0</h2>
+        </div>
+      </div>
+
+      <!-- Broadcast Notification (Admin only) -->
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 mt-8">
+        <h2 class="font-bold text-teal-950 mb-4">Send Broadcast Notification</h2>
+        <form id="notif-form" class="flex flex-col sm:flex-row gap-3">
+          <input type="text" id="notif-title" placeholder="Title" required class="flex-1 rounded-md border border-slate-300 px-3 py-2 text-sm outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500">
+          <input type="text" id="notif-msg" placeholder="Message" required class="flex-1 rounded-md border border-slate-300 px-3 py-2 text-sm outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500">
+          <button type="submit" class="bg-teal-700 hover:bg-teal-800 text-white px-5 py-2 rounded-lg font-bold text-sm">Send</button>
+        </form>
       </div>
 
       <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
@@ -211,21 +229,7 @@
         $('#nav-user-role').text(currentUser.role);
     }
 
-    function loadNotifications() {
-        Api.call('/api/notifications', 'GET').done(function(res){
-            const nots = res.data || [];
-            let unread = nots.filter(n => !n.is_read).length;
-            if(unread > 0) $('#unread-badge').removeClass('hidden'); else $('#unread-badge').addClass('hidden');
-            let html = nots.length === 0 ? '<p class="p-4 text-gray-500 text-center">No notifications</p>' : '';
-            nots.slice(0, 10).forEach(n => {
-                html += `<div class="p-3 hover:bg-slate-50 cursor-pointer border-b border-gray-50">
-                    <p class="font-bold text-teal-800 text-sm">${n.title}</p>
-                    <p class="text-xs text-gray-600 mt-1">${n.message}</p>
-                </div>`;
-            });
-            $('#notif-list').html(html);
-        });
-    }
+    function loadNotifications() { Api.loadNotifications(); }
     window.loadNotifications = loadNotifications;
     loadNotifications();
 
@@ -234,6 +238,8 @@
       $('#event').text(data.events?.total_events || 0);
       $('#users').text(data.users?.active_users || 0);
       $('#regs').text(data.registrations?.total_registrations || 0);
+      $('#promos').text(data.promos?.total_promos || 0);
+      $('#unread-notifs').text(data.notifications?.total_notifications || 0);
     });
 
     Api.call('/api/users', 'GET').done(res => {
@@ -269,17 +275,36 @@
       });
     });
 
+    $('#notif-form').on('submit', function(e) {
+      e.preventDefault();
+      const btn = $(this).find('button');
+      btn.prop('disabled', true).text('Sending...');
+      Api.call('/api/notifications', 'POST', {
+        title: $('#notif-title').val(),
+        message: $('#notif-msg').val(),
+        type: 'broadcast',
+        recipient_id: null
+      }).done(function() {
+        showGlobalToast('Notification sent to all users!');
+        $('#notif-form')[0].reset();
+      }).fail(function(err) {
+        showGlobalToast(err.responseJSON?.message || 'Failed to send notification.', true);
+      }).always(function() {
+        btn.prop('disabled', false).text('Send');
+      });
+    });
+
     window.toggleUser = function(id, current) {
         const me = auth.getUser();
         if(me && me.id === id) {
-            alert("You cannot disable your own administrator account.");
+            showGlobalToast('You cannot disable your own administrator account.', true);
             return;
         }
-        if(confirm("Confirm: Change user access status?")) {
+        if(confirm('Confirm: Change user access status?')) {
             const action = current ? 'disable' : 'enable';
             Api.call('/api/users/' + id + '/' + action, 'PATCH').done(() => {
                 location.reload();
-            }).fail(() => alert("Access update failed."));
+            }).fail(() => showGlobalToast('Access update failed.', true));
         }
     };
   });

@@ -209,7 +209,7 @@
 
       // Load User Info
       function loadProfile() {
-          Api.call('/api/users/me', 'GET').done(res => {
+          Api.call('/api/users/profile/me', 'GET').done(res => {
             const user = res.data || res;
             $('#info-name').text(user.full_name);
             $('#info-email').text(user.email);
@@ -289,23 +289,23 @@
         const btn = $('#update-btn');
         btn.prop('disabled', true).text('Updating...');
 
-        Api.call('/api/users/me', 'PATCH', data).done(() => {
+        Api.call('/api/users/profile/me', 'PATCH', data).done(() => {
             showToast('Profile updated successfully!');
-            // Sync with storage
             const stored = auth.getUser();
             if (stored) {
               stored.full_name = data.full_name;
               stored.email = data.email;
               const storage = sessionStorage.getItem('token') ? sessionStorage : localStorage;
               storage.setItem('user', JSON.stringify(stored));
-              
-              // Immediate visual updates
               $('#info-name').text(data.full_name);
               $('#nav-user-name').text(data.full_name);
               $('#avatar').text(data.full_name.charAt(0).toUpperCase());
             }
         }).fail(err => {
-            const msg = err.responseJSON?.message || 'Update failed';
+            const status = err.status;
+            const msg = status === 409
+                ? 'That email is already in use by another account.'
+                : (err.responseJSON?.message || 'Update failed');
             showToast(msg, true);
         }).always(() => {
             btn.prop('disabled', false).text('Update Profile');
@@ -313,18 +313,7 @@
       });
 
       // Notifications Logic (used by auth.js)
-      function loadNotifications() {
-          Api.call('/api/notifications', 'GET').done(res => {
-              const nots = res.data || [];
-              const unread = nots.filter(n => !n.is_read).length;
-              if (unread > 0) $('#unread-badge').removeClass('hidden'); else $('#unread-badge').addClass('hidden');
-              let html = nots.length === 0 ? '<p class="p-4 text-gray-500 text-center">No notifications</p>' : '';
-              nots.slice(0, 10).forEach(n => {
-                  html += `<div class="p-3 hover:bg-slate-50 border-b border-gray-50"><p class="font-bold text-teal-800 text-sm">${n.title}</p><p class="text-xs text-gray-600 mt-1">${n.message}</p></div>`;
-              });
-              $('#notif-list').html(html);
-          });
-      }
+      function loadNotifications() { Api.loadNotifications(); }
       window.loadNotifications = loadNotifications;
       loadNotifications();
     });

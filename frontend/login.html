@@ -71,11 +71,9 @@
 
         Api.call('/api/auth/login', 'POST', logindata)
           .done(function (res) {
-            const data = res.data || res; // fallback if data is wrapped
+            const data = res.data || res;
             localStorage.setItem('token', data.token);
             localStorage.setItem('user', JSON.stringify(data.user));
-
-            // Redirect based on role
             if (data.user && data.user.role === 'admin') {
               window.location.href = 'admin-dashboard.html';
             } else {

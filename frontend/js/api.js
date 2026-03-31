@@ -1,5 +1,20 @@
 const base_url = "http://localhost:4000";
 
+function showGlobalToast(msg, isErr) {
+    let toast = document.getElementById('global-toast');
+    if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'global-toast';
+        toast.style.cssText = 'position:fixed;bottom:20px;right:20px;z-index:9999;padding:14px 20px;border-radius:12px;color:#fff;font-weight:600;font-size:14px;box-shadow:0 4px 20px rgba(0,0,0,0.2);transition:opacity 0.3s;';
+        document.body.appendChild(toast);
+    }
+    toast.style.background = isErr ? '#dc2626' : '#0f766e';
+    toast.style.opacity = '1';
+    toast.textContent = msg;
+    clearTimeout(toast._timer);
+    toast._timer = setTimeout(() => { toast.style.opacity = '0'; }, 3500);
+}
+
 const Api = {
     call: function(endpoint, method = 'GET', data = null, isFile = false){
         const token = localStorage.getItem('token') || sessionStorage.getItem('token');
@@ -26,12 +41,11 @@ const Api = {
         }
 
         return $.ajax(settings).fail(function(jqXHR, textStatus, errorThrown) {
-            // Handle global auth errors (Expired token or Unauthorized)
             if (jqXHR.status === 401 && endpoint !== '/api/auth/login') {
                 auth.logout('Your session has expired. Please login again.');
             }
             if (jqXHR.status === 403) {
-                alert('Forbidden: You do not have permission to perform this action.');
+                showGlobalToast('You do not have permission to perform this action.', true);
             }
         });
     },
@@ -75,5 +89,13 @@ const Api = {
         } catch (e) {
             return null;
         }
+    },
+
+    loadNotifications: function() {
+        const user = auth.getUser();
+        if (!user) return;
+        Api.call('/api/notifications', 'GET').done(function(res) {
+            auth.renderNotifications(res.data || [], user.role === 'admin');
+        });
     }
 };

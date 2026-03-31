@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Announcement - CivicEvents+</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 flex flex-col min-h-screen text-slate-800 font-sans">
+
+  <nav class="relative bg-teal-950 border-b border-teal-800 shadow-md">
+    <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+      <div class="relative flex h-16 items-center justify-between">
+        <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+          <button id="mob-menu" type="button" class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-white/5 hover:text-white">
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/></svg>
+          </button>
+        </div>
+        <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+          <div class="flex shrink-0 items-center">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXdFae6GWB-DBtiL0kLto2aIUnR5G_c5bp_g&s" alt="Logo" class="h-8 w-auto rounded"/>
+          </div>
+          <div class="hidden sm:ml-6 sm:block">
+            <div class="flex space-x-4">
+              <a href="admin-dashboard.html" class="admin-only hidden rounded-md px-3 py-2 text-sm font-medium text-teal-300 hover:text-white">Admin Dashboard</a>
+              <a href="event.html" class="rounded-md px-3 py-2 text-sm font-medium text-teal-100 hover:bg-white/10 hover:text-white">Events</a>
+              <a href="announcement.html" class="rounded-md bg-teal-800 px-3 py-2 text-sm font-bold text-white">Announcements</a>
+              <a href="promo.html" class="rounded-md px-3 py-2 text-sm font-medium text-teal-100 hover:bg-white/10 hover:text-white">Promos</a>
+              <a href="services.html" class="user-only rounded-md px-3 py-2 text-sm font-medium text-teal-100 hover:bg-white/10 hover:text-white">Services</a>
+            </div>
+          </div>
+        </div>
+        <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+          <button id="bell" type="button" class="relative rounded-full p-1 text-teal-300 hover:text-white focus:outline-none">
+            <span id="unread-badge" class="absolute top-0 right-0 h-2 w-2 bg-red-500 rounded-full hidden"></span>
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" /></svg>
+          </button>
+          <div id="notif-dropdown" class="hidden absolute right-0 top-12 z-50 mt-2 w-80 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 py-2 overflow-y-auto max-h-96">
+            <div class="px-4 py-2 border-b border-gray-100"><h3 class="text-sm font-bold text-gray-700">Notifications</h3></div>
+            <div id="notif-list" class="divide-y divide-gray-100 text-sm"><p class="p-4 text-gray-500 text-center">Loading...</p></div>
+          </div>
+          <div class="relative ml-4">
+            <button id="pro-menu" class="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white">
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTre4TseOqU7NynnfZPa9QM2YuHLO9KdVPwrA&s" class="h-8 w-8 rounded-full" />
+            </button>
+            <div id="user-dropdown" class="hidden absolute right-0 z-50 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5">
+              <div class="px-4 py-2 border-b border-slate-100"><p id="nav-user-name" class="text-sm font-bold text-slate-800"></p><p id="nav-user-role" class="text-xs text-slate-500 capitalize"></p></div>
+              <a href="profile.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-100">My Profile</a>
+              <a href="registration.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-100">My Registrations</a>
+              <button onclick="auth.logout()" class="w-full text-left block px-4 py-2 text-sm text-red-600 hover:bg-slate-100 font-bold border-t border-slate-100">Logout</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="mobile-menu" class="hidden sm:hidden bg-teal-900 absolute w-full z-40 border-t border-teal-800 shadow-xl">
+      <div class="space-y-1 px-2 pt-2 pb-3">
+        <a href="admin-dashboard.html" class="admin-only hidden block rounded-md px-3 py-2 text-base font-medium text-teal-300">Admin Dashboard</a>
+        <a href="event.html" class="text-teal-100 block rounded-md px-3 py-2 text-base font-medium">Events</a>
+        <a href="announcement.html" class="bg-teal-800 text-white block rounded-md px-3 py-2 text-base font-medium">Announcements</a>
+        <a href="promo.html" class="text-teal-100 block rounded-md px-3 py-2 text-base font-medium">Promos</a>
+        <a href="services.html" class="user-only text-teal-100 block rounded-md px-3 py-2 text-base font-medium">Services</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="grow p-4 sm:p-8">
+    <div class="mx-auto w-full max-w-3xl">
+
+      <a href="announcement.html" class="inline-flex items-center text-teal-700 hover:text-teal-900 mb-6 font-medium bg-white px-4 py-2 rounded-lg shadow-sm border border-teal-100 w-max">
+        <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        Back to Announcements
+      </a>
+
+      <div id="loading" class="text-center py-20 text-gray-500">
+        <div class="inline-block animate-spin rounded-full h-10 w-10 border-t-4 border-teal-700 mb-4 border-solid border-r-transparent"></div>
+        <p class="font-medium">Loading announcement...</p>
+      </div>
+
+      <div id="content" class="hidden bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8 space-y-6">
+        <div class="flex justify-between items-start gap-4">
+          <h1 id="ann-title" class="text-2xl font-extrabold text-teal-950"></h1>
+          <span id="ann-date" class="text-xs text-slate-400 whitespace-nowrap mt-1"></span>
+        </div>
+
+        <!-- Audio Player -->
+        <div>
+          <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Audio</p>
+          <audio id="ann-audio" controls class="w-full rounded-lg focus:ring-2 focus:ring-teal-500" aria-label="Announcement audio">
+            <source id="ann-src" src="" type="audio/mpeg">
+            <source id="ann-src-wav" src="" type="audio/wav">
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+
+        <!-- Transcript -->
+        <div id="transcript-box" class="hidden">
+          <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Transcript</p>
+          <div id="ann-transcript" class="bg-slate-50 border border-slate-200 rounded-lg p-4 text-sm text-slate-700 whitespace-pre-wrap"></div>
+        </div>
+
+        <!-- Admin actions -->
+        <div id="admin-btns" class="admin-only hidden flex gap-3 pt-4 border-t border-slate-100">
+          <a id="edit-btn" href="#" class="bg-amber-100 hover:bg-amber-200 text-amber-800 px-4 py-2 rounded-lg text-sm font-bold">Edit</a>
+          <button id="delete-btn" class="bg-red-50 hover:bg-red-100 text-red-600 px-4 py-2 rounded-lg text-sm font-bold">Delete</button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="bg-teal-950 text-teal-100 text-center lg:text-left mt-auto">
+    <div class="mx-6 py-8 text-center md:text-left">
+      <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div>
+          <h6 class="mb-3 font-semibold uppercase">CivicEvents</h6>
+          <p class="text-sm">Your accessible portal for city events and community services.</p>
+        </div>
+        <div>
+          <h6 class="mb-3 font-semibold uppercase">Links</h6>
+          <p class="mb-2"><a href="event.html" class="text-teal-300 hover:underline text-sm">Events</a></p>
+          <p class="mb-2"><a href="announcement.html" class="text-teal-300 hover:underline text-sm">Announcements</a></p>
+          <p><a href="promo.html" class="text-teal-300 hover:underline text-sm">Promos</a></p>
+        </div>
+        <div>
+          <h6 class="mb-3 font-semibold uppercase">Contact</h6>
+          <p class="text-sm">civievent@gmail.com</p>
+          <p class="text-sm">+250788873423</p>
+          <p class="text-sm">Rwanda, Kigali</p>
+        </div>
+      </div>
+    </div>
+    <div class="bg-teal-900/50 p-4 text-center border-t border-teal-800">
+      <span>© 2026 Copyright. CivicEvents</span>
+    </div>
+  </footer>
+
+  <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300">
+    <div id="toast-box" class="px-5 py-3 rounded-xl shadow-xl text-white font-medium bg-teal-600">
+      <span id="toast-msg"></span>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    $(document).ready(function () {
+      auth.enforceRole(['admin', 'user']);
+      auth.setupNavigation();
+      const me = auth.getUser();
+      if (me) { $('#nav-user-name').text(me.full_name); $('#nav-user-role').text(me.role); }
+
+      function loadNotifications() { Api.loadNotifications(); }
+      window.loadNotifications = loadNotifications;
+      loadNotifications();
+
+      function showToast(msg, isErr) {
+        $('#toast-box').removeClass('bg-teal-600 bg-red-600').addClass(isErr ? 'bg-red-600' : 'bg-teal-600');
+        $('#toast-msg').text(msg);
+        $('#toast').removeClass('translate-y-20 opacity-0');
+        setTimeout(() => $('#toast').addClass('translate-y-20 opacity-0'), 3000);
+      }
+
+      const annId = new URLSearchParams(window.location.search).get('id');
+      if (!annId) { window.location.href = 'announcement.html'; return; }
+
+      Api.call('/api/announcements/' + annId, 'GET').done(function (res) {
+        const a = res.data || res;
+        $('#loading').addClass('hidden');
+        $('#content').removeClass('hidden');
+
+        $('#ann-title').text(a.title);
+        $('#ann-date').text(new Date(a.created_at).toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric' }));
+
+        const audioUrl = a.audio_url && a.audio_url.startsWith('http') ? a.audio_url : 'http://localhost:4000' + a.audio_url;
+        $('#ann-src, #ann-src-wav').attr('src', audioUrl);
+        document.getElementById('ann-audio').load();
+
+        if (a.transcript) {
+          $('#ann-transcript').text(a.transcript);
+          $('#transcript-box').removeClass('hidden');
+        }
+
+        // admin actions
+        if (me && me.role === 'admin') {
+          $('#edit-btn').attr('href', 'admin-announcement.html?id=' + a.id);
+          $('#delete-btn').on('click', function () {
+            if (!confirm('Delete this announcement?')) return;
+            Api.call('/api/announcements/' + a.id, 'DELETE').done(function () {
+              showToast('Announcement deleted.');
+              setTimeout(() => window.location.href = 'announcement.html', 1500);
+            }).fail(function () { showToast('Delete failed.', true); });
+          });
+        }
+      }).fail(function () {
+        $('#loading').html('<p class="text-red-500 bg-red-50 p-4 rounded inline-block">Announcement not found.</p>');
+      });
+    });
+  </script>
+</body>
+</html>

@@ -214,25 +214,9 @@
             $('#nav-user-role').text(currentUser.role);
         }
 
-        function loadNotifications() {
-            Api.call('/api/notifications', 'GET').done(function(res){
-                const nots = res.data || [];
-                let unread = nots.filter(n => !n.is_read).length;
-                if(unread > 0) $('#unread-badge').removeClass('hidden'); else $('#unread-badge').addClass('hidden');
-                
-                let html = '';
-                if(nots.length === 0) html = '<p class="p-4 text-gray-500 text-center">No notifications</p>';
-                nots.slice(0, 10).forEach(n => {
-                    html += `<div class="p-3 hover:bg-slate-50 cursor-pointer border-b border-gray-50">
-                        <p class="font-bold text-teal-800 text-sm">${n.title}</p>
-                        <p class="text-xs text-gray-600 mt-1">${n.message}</p>
-                    </div>`;
-                });
-                $('#notif-list').html(html);
-            });
-        }
+        function loadNotifications() { Api.loadNotifications(); }
         window.loadNotifications = loadNotifications;
-        loadNotifications(); // initial check (badge only)
+        loadNotifications();
 
         // Events Pagination State
         let currentPage = 1;
@@ -365,12 +349,16 @@
                 card.fadeOut(300, function() {
                     $(this).remove();
                     if($('#eventgrid').children().length === 0){
-                        loadEvents(); // reload if empty to refresh page counts
+                        loadEvents();
                     }
                 });
             })
             .fail(function(err){
-                alert(err.responseJSON?.message || 'Could not delete the event. Try again');
+                const msg = err.responseJSON?.message || '';
+                const friendly = msg.includes('foreign key') || msg.includes('registrations') || err.status === 500
+                    ? 'Cannot delete: this event has registrations. Cancel all registrations first.'
+                    : (msg || 'Could not delete the event. Try again.');
+                showGlobalToast(friendly, true);
                 $(button).html('Delete').prop('disabled', false).removeClass('opacity-50');
             });
         }

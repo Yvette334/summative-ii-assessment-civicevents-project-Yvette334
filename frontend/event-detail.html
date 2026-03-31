@@ -6,29 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Event Detail - CivicEvents+</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    .star-rating input {
-      display: none;
-    }
-
-    .star-rating label {
-      font-size: 2rem;
-      color: #ccc;
-      cursor: pointer;
-      transition: color 0.2s;
-    }
-
-    .star-rating input:checked~label,
-    .star-rating label:hover,
-    .star-rating label:hover~label {
-      color: #f59e0b;
-    }
-
-    .star-rating {
-      direction: rtl;
-      display: inline-flex;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body class="bg-slate-50 flex flex-col min-h-screen text-slate-800 font-sans">
@@ -336,8 +314,9 @@
         if(currentUser) {
             $('#nav-user-name').text(currentUser.full_name);
             $('#nav-user-role').text(currentUser.role);
+            // hide feedback form for admin, show for users
             if (currentUser.role === 'admin') {
-                 $('#feedback-form-container').hide(); // Admin usually manages, let's keep it clean
+                $('#feedback-form-container').hide();
             }
         }
 
@@ -348,29 +327,9 @@
             setTimeout(() => $('#toast').addClass('translate-y-20 opacity-0'), 3000);
         }
 
-        function loadNotifications() {
-            Api.call('/api/notifications', 'GET').done(function(res){
-                const nots = res.data || [];
-                let unread = nots.filter(n => !n.is_read).length;
-                if(unread > 0) $('#unread-badge').removeClass('hidden'); else $('#unread-badge').addClass('hidden');
-                let html = nots.length === 0 ? '<p class="p-4 text-gray-500 text-center">No notifications</p>' : '';
-                nots.slice(0, 10).forEach(n => {
-                    html += `<div class="p-3 hover:bg-slate-50 cursor-pointer border-b border-gray-50">
-                        <p class="font-bold text-teal-800 text-sm">${n.title}</p>
-                        <p class="text-xs text-gray-600 mt-1">${n.message}</p>
-                    </div>`;
-                });
-                $('#notif-list').html(html);
-            });
-        }
+        function loadNotifications() { Api.loadNotifications(); }
         window.loadNotifications = loadNotifications;
         loadNotifications();
-        
-        // Ensure notif badge logic works on this page too
-        Api.call('/api/notifications', 'GET').done(function(res){
-            const nots = res.data || [];
-            if(nots.filter(n => !n.is_read).length > 0) $('#unread-badge').removeClass('hidden');
-        });
 
         const params = new URLSearchParams(window.location.search);
         const eventId = params.get('id');
@@ -387,6 +346,14 @@
             $('#title').text(event.title);
             $('#description').text(event.description || "No description provided.");
             $('#loc-text').text(event.location);
+            // map link if location looks like a URL or add Google Maps search
+            const isUrl = event.location && event.location.startsWith('http');
+            if (isUrl) {
+                $('#location').html(`<svg class="w-5 h-5 mr-2 text-teal-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg><a href="${event.location}" target="_blank" class="text-teal-600 underline font-medium">${event.location}</a>`);
+            } else {
+                const mapsUrl = 'https://maps.google.com/?q=' + encodeURIComponent(event.location);
+                $('#location').html(`<svg class="w-5 h-5 mr-2 text-teal-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg><a href="${mapsUrl}" target="_blank" class="text-teal-600 underline font-medium">${event.location}</a>`);
+            }
             
             const dateObj = new Date(event.starts_at || event.created_at || event.date);
             $('#date-text').text(dateObj.toLocaleDateString('en-US', { weekday: 'short', month: 'long', day: 'numeric', year: 'numeric', hour:'2-digit', minute:'2-digit' }));
@@ -396,12 +363,8 @@
             const imgUrl = Api.resolveMediaUrl(file, 'events') || 'https://placehold.co/1200x600/EEE/31343C';
             $('#img').attr('src', imgUrl).on('error', function() { $(this).attr('src', 'https://placehold.co/1200x600/EEE/31343C'); });
 
-            // Feedbacks (Only admins can view all feedback based on backend routes)
-            if (currentUser && currentUser.role === 'admin') {
-                loadFeedbacks();
-            } else {
-                $('#feedback-list').html('<p class="text-slate-500 italic">Community feedback is visible to administrators.</p>');
-            }
+            // Feedbacks - visible to all users
+            loadFeedbacks();
             checkRegistrationStatus();
 
             if (currentUser && currentUser.role === 'admin') {
@@ -412,14 +375,19 @@
             $('#loading').html('<p class="text-red-500 bg-red-50 p-4 rounded inline-block">Event not found or failed to load.</p>');
         });
 
-        // 2. Load Feedbacks
+        // 2. Load Feedbacks — admin uses event endpoint, users use my-feedback
         function loadFeedbacks() {
-            Api.call(`/api/event-feedback/event/${eventId}`, 'GET').done(function(res){
-                const feedbacks = res.data || [];
-                renderFeedbacks(feedbacks || []);
-            }).fail(function() {
-               renderFeedbacks([]); 
-            });
+            if (currentUser.role === 'admin') {
+                Api.call('/api/event-feedback/event/' + eventId, 'GET').done(function(res){
+                    renderFeedbacks(res.data || []);
+                }).fail(function() { renderFeedbacks([]); });
+            } else {
+                // users can only see their own feedback + average from event endpoint attempt
+                Api.call('/api/event-feedback/my-feedback', 'GET').done(function(res){
+                    const all = (res.data || []).filter(f => f.event_id == eventId);
+                    renderFeedbacks(all);
+                }).fail(function() { renderFeedbacks([]); });
+            }
         }
 
         function renderFeedbacks(feedbacks) {

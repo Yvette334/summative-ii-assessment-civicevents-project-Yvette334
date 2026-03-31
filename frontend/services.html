@@ -199,22 +199,7 @@
         setTimeout(() => $('#toast').addClass('translate-y-20 opacity-0'), 3000);
       }
 
-      function loadNotifications() {
-          Api.call('/api/notifications', 'GET').done(function(nots){
-              let unread = nots.filter(n => !n.is_read).length;
-              if(unread > 0) $('#unread-badge').removeClass('hidden'); else $('#unread-badge').addClass('hidden');
-              
-              let html = '';
-              if(nots.length === 0) html = '<p class="p-4 text-gray-500 text-center">No notifications</p>';
-              nots.slice(0, 10).forEach(n => {
-                  html += `<div class="p-3 hover:bg-slate-50 cursor-pointer border-b border-gray-50">
-                      <p class="font-bold text-teal-800 text-sm">${n.title}</p>
-                      <p class="text-xs text-gray-600 mt-1">${n.message}</p>
-                  </div>`;
-              });
-              $('#notif-list').html(html);
-          });
-      }
+      function loadNotifications() { Api.loadNotifications(); }
       window.loadNotifications = loadNotifications;
       loadNotifications();
 

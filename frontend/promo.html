@@ -127,20 +127,24 @@
   </main>
 
   <!-- video modal -->
-  <div id="video-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4">
-    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-3xl overflow-hidden">
+  <div id="video-modal" class="hidden fixed inset-0 z-50 flex items-start justify-center bg-black/70 p-4 overflow-y-auto">
+    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-3xl overflow-hidden my-8">
       <div class="flex justify-between items-center px-6 py-4 border-b border-slate-100">
         <h3 id="modal-title" class="font-bold text-teal-950 text-lg"></h3>
         <button id="close-modal" class="text-slate-400 hover:text-slate-700 text-2xl font-bold">&times;</button>
       </div>
       <div class="p-4">
         <!-- video with captions support -->
-        <video id="promo-video" controls class="w-full rounded-lg bg-black" aria-label="Promo video">
+        <video id="promo-video" controls class="w-full rounded-lg bg-black" aria-label="Promo video" preload="none" loading="lazy">
           <source id="video-src" src="" type="video/mp4">
           <!-- captions track added dynamically -->
           Your browser does not support the video element.
         </video>
         <p id="modal-desc" class="mt-4 text-sm text-slate-600"></p>
+        <div id="caption-box" class="hidden mt-3 bg-slate-50 border border-slate-200 rounded-lg p-3">
+          <p class="text-xs font-bold text-slate-500 uppercase mb-1">Captions / Transcript</p>
+          <p id="modal-captions" class="text-sm text-slate-700 whitespace-pre-wrap"></p>
+        </div>
       </div>
     </div>
   </div>
@@ -262,25 +266,9 @@
         $('#nav-user-role').text(me.role);
       }
 
-        function loadNotifications() {
-            Api.call('/api/notifications', 'GET').done(function(res){
-                const nots = res.data || [];
-                let unread = nots.filter(n => !n.is_read).length;
-                if(unread > 0) $('#unread-badge').removeClass('hidden'); else $('#unread-badge').addClass('hidden');
-                
-                let html = '';
-                if(nots.length === 0) html = '<p class="p-4 text-gray-500 text-center">No notifications</p>';
-                nots.slice(0, 10).forEach(n => {
-                    html += `<div class="p-3 hover:bg-slate-50 cursor-pointer border-b border-gray-50">
-                        <p class="font-bold text-teal-800 text-sm">${n.title}</p>
-                        <p class="text-xs text-gray-600 mt-1">${n.message}</p>
-                    </div>`;
-                });
-                $('#notif-list').html(html);
-            });
-        }
+        function loadNotifications() { Api.loadNotifications(); }
         window.loadNotifications = loadNotifications;
-        loadNotifications(); // initial check (badge only)
+        loadNotifications();
 
       function showToast(msg, isErr) {
         $('#toast-box').removeClass('bg-teal-600 bg-red-600').addClass(isErr ? 'bg-red-600' : 'bg-teal-600');
@@ -319,6 +307,7 @@
               const adminBtns = me.role === 'admin' ? `
                 <div class="flex gap-2 mt-3 pt-3 border-t border-slate-100">
                   <a href="admin-promo.html?id=${p.id}" class="flex-1 text-center bg-amber-100 hover:bg-amber-200 text-amber-800 py-1.5 rounded text-sm font-medium">Edit</a>
+                  <button onclick="togglePublish('${p.id}', ${p.published}, this)" class="flex-1 ${p.published ? 'bg-slate-100 hover:bg-slate-200 text-slate-700' : 'bg-green-50 hover:bg-green-100 text-green-700'} py-1.5 rounded text-sm font-medium">${p.published ? 'Unpublish' : 'Publish'}</button>
                   <button onclick="deletePromo('${p.id}', this)" class="flex-1 bg-red-50 hover:bg-red-100 text-red-600 py-1.5 rounded text-sm font-medium">Delete</button>
                 </div>` : '';
 
@@ -326,7 +315,7 @@
 
               const card = `
               <div class="bg-white rounded-xl overflow-hidden shadow-sm border border-slate-200 hover:shadow-md transition flex flex-col">
-                <div class="relative bg-slate-900 h-48 flex items-center justify-center cursor-pointer group" onclick="openVideo('${videoUrl}', '${p.title.replace(/'/g, "\\'")}', '${(p.description || '').replace(/'/g, "\\'")}', '${p.caption_text || ''}')">
+                <div class="relative bg-slate-900 h-48 flex items-center justify-center cursor-pointer group promo-play-btn" data-url="${videoUrl}" data-title="${p.title.replace(/"/g, '&quot;')}" data-desc="${(p.description || '').replace(/"/g, '&quot;')}" data-captions="${(p.caption_text || '').replace(/"/g, '&quot;')}">
                   <svg class="w-16 h-16 text-white opacity-80 group-hover:opacity-100 transition" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M8 5v14l11-7z"/>
                   </svg>
@@ -338,7 +327,7 @@
                     ${draftBadge}
                   </div>
                   <p class="text-sm text-slate-600 line-clamp-2 flex-grow">${p.description || ''}</p>
-                  <button onclick="openVideo('${videoUrl}', '${p.title.replace(/'/g, "\\'")}', '${(p.description || '').replace(/'/g, "\\'")}', '${p.caption_text || ''}')" class="mt-4 w-full bg-teal-700 hover:bg-teal-800 text-white py-2 rounded-lg text-sm font-bold transition">
+                  <button class="mt-4 w-full bg-teal-700 hover:bg-teal-800 text-white py-2 rounded-lg text-sm font-bold transition promo-play-btn" data-url="${videoUrl}" data-title="${p.title.replace(/"/g, '&quot;')}" data-desc="${(p.description || '').replace(/"/g, '&quot;')}" data-captions="${(p.caption_text || '').replace(/"/g, '&quot;')}">
                     ▶ Watch Promo
                   </button>
                   ${adminBtns}
@@ -357,23 +346,31 @@
       }
       loadPromos();
 
+      // play button via delegated event (avoids onclick string escaping issues)
+      $(document).on('click', '.promo-play-btn', function () {
+        var url = $(this).data('url');
+        var title = $(this).data('title');
+        var desc = $(this).data('desc');
+        var captions = $(this).data('captions');
+        openVideo(url, title, desc, captions);
+      });
+
       // open video modal
       window.openVideo = function (url, title, desc, captions) {
         $('#modal-title').text(title);
         $('#modal-desc').text(desc);
-        $('#video-src').attr('src', url);
 
-        // remove old track and add new one if captions exist
-        $('#promo-video track').remove();
+        var vid = document.getElementById('promo-video');
+        $('#video-src').attr('src', url);
+        vid.load();
+
         if (captions) {
-          // captions are text, create a blob URL for the track
-          const blob = new Blob([captions], { type: 'text/vtt' });
-          const trackUrl = URL.createObjectURL(blob);
-          $('<track>').attr({ kind: 'captions', src: trackUrl, srclang: 'en', label: 'English', default: true }).appendTo('#promo-video');
+          $('#modal-captions').text(captions);
+          $('#caption-box').removeClass('hidden');
+        } else {
+          $('#caption-box').addClass('hidden');
         }
 
-        const vid = document.getElementById('promo-video');
-        vid.load();
         $('#video-modal').removeClass('hidden');
       };
 
@@ -388,6 +385,19 @@
           $('#video-modal').addClass('hidden');
         }
       });
+
+      // toggle publish/unpublish
+      window.togglePublish = function(id, isPublished, btn) {
+        const action = isPublished ? 'unpublish' : 'publish';
+        $(btn).prop('disabled', true).text('...');
+        Api.call('/api/promos/' + id + '/' + action, 'PATCH').done(function() {
+          showToast('Promo ' + action + 'ed.');
+          loadPromos();
+        }).fail(function() {
+          showToast('Could not ' + action + ' promo.', true);
+          $(btn).prop('disabled', false).text(isPublished ? 'Unpublish' : 'Publish');
+        });
+      };
 
       // delete promo (admin)
       window.deletePromo = function (id, btn) {
