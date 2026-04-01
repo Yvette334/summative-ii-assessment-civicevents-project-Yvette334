@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Promos - CivicEvents+</title>
+  <title>Promos</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
@@ -135,7 +135,7 @@
       </div>
       <div class="p-4">
         <!-- video with captions support -->
-        <video id="promo-video" controls class="w-full rounded-lg bg-black" aria-label="Promo video" preload="none" loading="lazy">
+        <video id="promo-video" controls class="w-full rounded-lg bg-black" aria-label="Promo video">
           <source id="video-src" src="" type="video/mp4">
           <!-- captions track added dynamically -->
           Your browser does not support the video element.
@@ -163,38 +163,81 @@
           <h6 class="mb-4 flex items-center justify-center font-semibold uppercase md:justify-start">
             <span class="me-3 [&>svg]:h-4 [&>svg]:w-4">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12.378 1.602a.75.75 0 00-.756 0L3 6.632l9 5.25 9-5.25-8.622-5.03zM21.75 7.93l-9 5.25v9l8.628-5.032a.75.75 0 00.372-.648V7.93zM11.25 22.18v-9l-9-5.25v8.57a.75.75 0 00.372.648l8.628 5.033z" />
+                <path
+                  d="M12.378 1.602a.75.75 0 00-.756 0L3 6.632l9 5.25 9-5.25-8.622-5.03zM21.75 7.93l-9 5.25v9l8.628-5.032a.75.75 0 00.372-.648V7.93zM11.25 22.18v-9l-9-5.25v8.57a.75.75 0 00.372.648l8.628 5.033z" />
               </svg>
             </span>
             CivicEvents
           </h6>
-          <p>Your accessible portal for city events and community services. Stay connected with what's happening in your city.</p>
+          <p>
+            Your accessible portal for city events and community services. Stay connected with what's happening in your
+            city.
+          </p>
+        </div>
+        <!--link section -->
+        <div>
+          <h6 class="mb-4 flex justify-center font-semibold uppercase md:justify-start">
+            Website Links
+          </h6>
+          <p class="mb-4">
+            <a href="event.html"
+              class="rounded-md px-3 py-2 text-sm font-medium text-teal-300 hover:bg-white/5 hover:text-white">Event</a>
+          </p>
+          <p class="mb-4">
+            <a href="announcement.html"
+              class="rounded-md px-3 py-2 text-sm font-medium text-teal-300 hover:bg-white/5 hover:text-white">Announcements</a>
+          </p>
+          <p class="mb-4">
+            <a href="promo.html"
+              class="rounded-md px-3 py-2 text-sm font-medium text-teal-300 hover:bg-white/5 hover:text-white">Promos</a>
+
+          </p>
+          <p>
+            <a href="services.html"
+              class="rounded-md px-3 py-2 text-sm font-medium text-teal-300 hover:bg-white/5 hover:text-white">Services</a>
+          </p>
         </div>
         <div>
-          <h6 class="mb-4 flex justify-center font-semibold uppercase md:justify-start">Website Links</h6>
-          <p class="mb-4"><a href="event.html" class="text-teal-300 hover:underline">Events</a></p>
-          <p class="mb-4"><a href="announcement.html" class="text-teal-300 hover:underline">Announcements</a></p>
-          <p class="mb-4"><a href="promo.html" class="text-teal-300 hover:underline">Promos</a></p>
-          <p><a href="services.html" class="text-teal-300 hover:underline">Services</a></p>
-        </div>
-        <div>
-          <h6 class="mb-4 flex justify-center font-semibold uppercase md:justify-start">Contact & Help</h6>
+          <h6 class="mb-4 flex justify-center font-semibold uppercase md:justify-start">
+            Contact & help
+          </h6>
           <p class="mb-4 flex items-center justify-center md:justify-start">
             <span class="me-3 [&>svg]:h-5 [&>svg]:w-5">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M11.47 3.84a.75.75 0 011.06 0l8.69 8.69a.75.75 0 101.06-1.06l-8.689-8.69a2.25 2.25 0 00-3.182 0l-8.69 8.69a.75.75 0 001.061 1.06l8.69-8.69z" /><path d="M12 5.432l8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 01-.75-.75v-4.5a.75.75 0 00-.75-.75h-3a.75.75 0 00-.75.75V21a.75.75 0 01-.75.75H5.625a1.875 1.875 0 01-1.875-1.875v-6.198a2.29 2.29 0 00.091-.086L12 5.43z" /></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M11.47 3.84a.75.75 0 011.06 0l8.69 8.69a.75.75 0 101.06-1.06l-8.689-8.69a2.25 2.25 0 00-3.182 0l-8.69 8.69a.75.75 0 001.061 1.06l8.69-8.69z" />
+                <path
+                  d="M12 5.432l8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 01-.75-.75v-4.5a.75.75 0 00-.75-.75h-3a.75.75 0 00-.75.75V21a.75.75 0 01-.75.75H5.625a1.875 1.875 0 01-1.875-1.875v-6.198a2.29 2.29 0 00.091-.086L12 5.43z" />
+              </svg>
             </span>
             Rwanda, Kigali
           </p>
           <p class="mb-4 flex items-center justify-center md:justify-start">
             <span class="me-3 [&>svg]:h-5 [&>svg]:w-5">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M1.5 8.67v8.58a3 3 0 003 3h15a3 3 0 003-3V8.67l-8.928 5.493a3 3 0 01-3.144 0L1.5 8.67z" /><path d="M22.5 6.908V6.75a3 3 0 00-3-3h-15a3 3 0 00-3 3v.158l9.714 5.978a1.5 1.5 0 001.572 0L22.5 6.908z" /></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M1.5 8.67v8.58a3 3 0 003 3h15a3 3 0 003-3V8.67l-8.928 5.493a3 3 0 01-3.144 0L1.5 8.67z" />
+                <path
+                  d="M22.5 6.908V6.75a3 3 0 00-3-3h-15a3 3 0 00-3 3v.158l9.714 5.978a1.5 1.5 0 001.572 0L22.5 6.908z" />
+              </svg>
             </span>
             civievent@gmail.com
           </p>
           <p class="mb-4 flex items-center justify-center md:justify-start">
             <span class="me-3 [&>svg]:h-5 [&>svg]:w-5">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                <path fill-rule="evenodd" d="M1.5 4.5a3 3 0 013-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 01-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 006.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 011.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 01-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 6.75V4.5z" clip-rule="evenodd" />
+                <path fill-rule="evenodd"
+                  d="M1.5 4.5a3 3 0 013-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 01-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 006.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 011.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 01-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 6.75V4.5z"
+                  clip-rule="evenodd" />
+              </svg>
+            </span>
+            +250788873423
+          </p>
+          <p class="mb-4 flex items-center justify-center md:justify-start">
+            <span class="me-3 [&>svg]:h-5 [&>svg]:w-5">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <path fill-rule="evenodd"
+                  d="M1.5 4.5a3 3 0 013-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 01-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 006.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 011.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 01-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 6.75V4.5z"
+                  clip-rule="evenodd" />
               </svg>
             </span>
             +250788873423
@@ -202,6 +245,8 @@
         </div>
       </div>
     </div>
+
+    <!--Copyright section-->
     <div class="bg-teal-900/50 p-6 text-center border-t border-teal-800">
       <span>© 2026 Copyright.CivicEvents</span>
     </div>
@@ -221,9 +266,25 @@
         $('#nav-user-role').text(me.role);
       }
 
-        function loadNotifications() { Api.loadNotifications(); }
+        function loadNotifications() {
+            Api.call('/api/notifications', 'GET').done(function(res){
+                const nots = res.data || [];
+                let unread = nots.filter(n => !n.is_read).length;
+                if(unread > 0) $('#unread-badge').removeClass('hidden'); else $('#unread-badge').addClass('hidden');
+                
+                let html = '';
+                if(nots.length === 0) html = '<p class="p-4 text-gray-500 text-center">No notifications</p>';
+                nots.slice(0, 10).forEach(n => {
+                    html += `<div class="p-3 hover:bg-slate-50 cursor-pointer border-b border-gray-50">
+                        <p class="font-bold text-teal-800 text-sm">${n.title}</p>
+                        <p class="text-xs text-gray-600 mt-1">${n.message}</p>
+                    </div>`;
+                });
+                $('#notif-list').html(html);
+            });
+        }
         window.loadNotifications = loadNotifications;
-        loadNotifications();
+        loadNotifications(); // initial check (badge only)
 
       function showToast(msg, isErr) {
         $('#toast-box').removeClass('bg-teal-600 bg-red-600').addClass(isErr ? 'bg-red-600' : 'bg-teal-600');
@@ -262,7 +323,6 @@
               const adminBtns = me.role === 'admin' ? `
                 <div class="flex gap-2 mt-3 pt-3 border-t border-slate-100">
                   <a href="admin-promo.html?id=${p.id}" class="flex-1 text-center bg-amber-100 hover:bg-amber-200 text-amber-800 py-1.5 rounded text-sm font-medium">Edit</a>
-                  <button onclick="togglePublish('${p.id}', ${p.published}, this)" class="flex-1 ${p.published ? 'bg-slate-100 hover:bg-slate-200 text-slate-700' : 'bg-green-50 hover:bg-green-100 text-green-700'} py-1.5 rounded text-sm font-medium">${p.published ? 'Unpublish' : 'Publish'}</button>
                   <button onclick="deletePromo('${p.id}', this)" class="flex-1 bg-red-50 hover:bg-red-100 text-red-600 py-1.5 rounded text-sm font-medium">Delete</button>
                 </div>` : '';
 
@@ -340,19 +400,6 @@
           $('#video-modal').addClass('hidden');
         }
       });
-
-      // toggle publish/unpublish
-      window.togglePublish = function(id, isPublished, btn) {
-        const action = isPublished ? 'unpublish' : 'publish';
-        $(btn).prop('disabled', true).text('...');
-        Api.call('/api/promos/' + id + '/' + action, 'PATCH').done(function() {
-          showToast('Promo ' + action + 'ed.');
-          loadPromos();
-        }).fail(function() {
-          showToast('Could not ' + action + ' promo.', true);
-          $(btn).prop('disabled', false).text(isPublished ? 'Unpublish' : 'Publish');
-        });
-      };
 
       // delete promo (admin)
       window.deletePromo = function (id, btn) {
